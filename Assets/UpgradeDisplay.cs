@@ -9,8 +9,10 @@ public class UpgradeDisplay : MonoBehaviour
     [SerializeField] private Text Name;
     [SerializeField] private Text Description;
     [SerializeField] private Text Cost;
+    [SerializeField] private Text TimeToGet;
 
-    public Upgrade Upgrade;
+    [HideInInspector] public Simulation Simulation;
+    [HideInInspector] public Upgrade Upgrade;
 
     private void Start()
     {
@@ -18,5 +20,19 @@ public class UpgradeDisplay : MonoBehaviour
         Description.text = Upgrade.Description;
         Cost.text = Upgrade.Cost.Select(cost => $"{cost.Amount} {cost.Type}")
             .Aggregate((aggregate, cost) => $"{aggregate}, {cost}");
+
+        int? timeToGet = Simulation.GetTimeToPurchase(Upgrade);
+        if (timeToGet == null)
+        {
+            TimeToGet.text = "ERR";
+            TimeToGet.color = Color.red;
+        }
+        else
+        {
+            TimeToGet.text = timeToGet.ToString() + " turns";
+            if (timeToGet < 6) TimeToGet.color = Color.green;
+            else if (timeToGet < 30) TimeToGet.color = Color.yellow;
+            else TimeToGet.color = Color.Lerp(Color.red, Color.yellow, .5f);
+        }
     }
 }

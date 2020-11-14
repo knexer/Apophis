@@ -519,6 +519,7 @@ MonoBehaviour:
   UpgradeParent: {fileID: 427354686}
   UpgradeDisplayPrefab: {fileID: 4551765599232423353, guid: 049eac0934c6c6a4794845a2b01553b7,
     type: 3}
+  Simulation: {fileID: 234400068}
 --- !u!1 &174097116
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 234400067}
+  - component: {fileID: 234400068}
   m_Layer: 0
   m_Name: Game State
   m_TagString: Untagged
@@ -755,6 +757,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &234400068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234400066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13aa0f793ae64946aae2989a733cba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resources: {fileID: 340005922}
+  CurrentTime: 0
+  MaxTime: 100
 --- !u!1 &263954848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,6 +1102,7 @@ GameObject:
   - component: {fileID: 340005920}
   - component: {fileID: 340005919}
   - component: {fileID: 340005918}
+  - component: {fileID: 340005922}
   m_Layer: 0
   m_Name: Resources
   m_TagString: Untagged
@@ -1166,6 +1184,18 @@ MonoBehaviour:
   Type: 0
   Amount: 10
   Growth: 1
+--- !u!114 &340005922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340005916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88891fbcf21f42448ee288b1ed1cceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &414055942
 GameObject:
   m_ObjectHideFlags: 0
