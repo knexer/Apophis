@@ -1777,6 +1777,7 @@ MonoBehaviour:
   Name: {fileID: 1514987258}
   Amount: {fileID: 769613235}
   Growth: {fileID: 484960866}
+  Simulation: {fileID: 234400068}
 --- !u!114 &537298775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2962,6 +2963,7 @@ MonoBehaviour:
   Name: {fileID: 1565925406}
   Amount: {fileID: 990651448}
   Growth: {fileID: 921612778}
+  Simulation: {fileID: 234400068}
 --- !u!1 &1145241507
 GameObject:
   m_ObjectHideFlags: 0
@@ -3381,6 +3383,7 @@ MonoBehaviour:
   Name: {fileID: 1592111341}
   Amount: {fileID: 911751423}
   Growth: {fileID: 566966315}
+  Simulation: {fileID: 234400068}
 --- !u!114 &1414855209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4644,6 +4647,7 @@ MonoBehaviour:
   Name: {fileID: 290146441}
   Amount: {fileID: 2111716602}
   Growth: {fileID: 959463357}
+  Simulation: {fileID: 234400068}
 --- !u!114 &1948961234
 MonoBehaviour:
   m_ObjectHideFlags: 0

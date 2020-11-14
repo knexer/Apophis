@@ -10,16 +10,10 @@ public class Upgrade : MonoBehaviour
     [SerializeField] public string Description;
 
     [SerializeField] public Cost[] Cost;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void OnBought(Simulation sim, ResourceManager resources)
     {
-        
+        resources.GetResource(ResourceType.Metal).Growth += 1;
     }
 }
 

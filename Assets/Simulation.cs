@@ -12,12 +12,14 @@ public class Simulation : MonoBehaviour
     public int CurrentTime = 0;
     public int MaxTime;
 
-    public void FastForwardTo(int nextTime)
+    public event Action OnSimChanged;
+
+    private void FastForwardTo(int nextTime)
     {
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
         {
             Resource resource = resources.GetResource(type);
-            resource.Amount += resource.Growth * nextTime - CurrentTime;
+            resource.Amount += resource.Growth * (nextTime - CurrentTime);
         }
 
         CurrentTime = nextTime;
@@ -41,5 +43,24 @@ public class Simulation : MonoBehaviour
         }
 
         return slowestResourceTime;
+    }
+
+    public void BuyUpgrade(Upgrade upgrade)
+    {
+        int? timeToBuy = GetTimeToPurchase(upgrade);
+        if (timeToBuy == null) throw new ArgumentException($"Upgrade {upgrade.name} can't be afforded before the end of time!");
+
+        FastForwardTo(CurrentTime + timeToBuy.Value);
+        foreach (Cost cost in upgrade.Cost)
+        {
+            Resource resource = resources.GetResource(cost.Type);
+            if (resource.Amount < cost.Amount) throw new Exception($"Expected at least {cost.Amount} of {cost.Type}, found only {resource.Amount}." +
+                                                                   $"This should not happen, because we should have fastforwarded until there was enough!");
+            resource.Amount -= cost.Amount;
+        }
+
+        upgrade.OnBought(this, resources);
+
+        OnSimChanged?.Invoke();
     }
 }

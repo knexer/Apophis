@@ -20,7 +20,14 @@ public class UpgradeDisplay : MonoBehaviour
         Description.text = Upgrade.Description;
         Cost.text = Upgrade.Cost.Select(cost => $"{cost.Amount} {cost.Type}")
             .Aggregate((aggregate, cost) => $"{aggregate}, {cost}");
+        GetComponent<Button>().onClick.AddListener(BuyUpgrade);
 
+        Simulation.OnSimChanged += UpdateDisplay;
+        UpdateDisplay();
+    }
+
+    private void UpdateDisplay()
+    {
         int? timeToGet = Simulation.GetTimeToPurchase(Upgrade);
         if (timeToGet == null)
         {
@@ -34,5 +41,12 @@ public class UpgradeDisplay : MonoBehaviour
             else if (timeToGet < 30) TimeToGet.color = Color.yellow;
             else TimeToGet.color = Color.Lerp(Color.red, Color.yellow, .5f);
         }
+
+        GetComponent<Button>().interactable = timeToGet != null;
+    }
+
+    private void BuyUpgrade()
+    {
+        Simulation.BuyUpgrade(Upgrade);
     }
 }
