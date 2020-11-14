@@ -13,7 +13,10 @@ public class Upgrade : MonoBehaviour
 
     public void OnBought(Simulation sim, ResourceManager resources)
     {
-        resources.GetResource(ResourceType.Metal).Growth += 1;
+        foreach (IUpgradeEffect effect in GetComponents<IUpgradeEffect>())
+        {
+            effect.Apply(sim, resources);
+        }
     }
 }
 
