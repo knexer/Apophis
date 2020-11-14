@@ -27,6 +27,6 @@ public class ResourceDisplay : MonoBehaviour
     private void UpdateResource()
     {
         Amount.text = resource.Amount.ToString();
-        Growth.text = resource.Growth.ToString();
+        Growth.text = $"+{resource.Growth}/cycle";
     }
 }

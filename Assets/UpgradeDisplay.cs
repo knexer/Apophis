@@ -36,7 +36,7 @@ public class UpgradeDisplay : MonoBehaviour
         }
         else
         {
-            TimeToGet.text = timeToGet.ToString() + " turns";
+            TimeToGet.text = timeToGet.ToString() + " cycles";
             if (timeToGet < 6) TimeToGet.color = Color.green;
             else if (timeToGet < 30) TimeToGet.color = Color.yellow;
             else TimeToGet.color = Color.Lerp(Color.red, Color.yellow, .5f);
