@@ -8,6 +8,7 @@ public class UpgradeList : MonoBehaviour
     [SerializeField] private GameObject UpgradeParent;
     [SerializeField] private UpgradeDisplay UpgradeDisplayPrefab;
     [SerializeField] private Simulation Simulation;
+    [SerializeField] private Timeline Timeline;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class UpgradeList : MonoBehaviour
             UpgradeDisplay upgradeDisplay = Instantiate(UpgradeDisplayPrefab, UpgradeDisplayParent, false);
             upgradeDisplay.Upgrade = upgrade;
             upgradeDisplay.Simulation = Simulation;
+            upgradeDisplay.Timeline = Timeline;
         }
     }
 }

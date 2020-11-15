@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UpgradeDisplay : MonoBehaviour
+public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Text Name;
     [SerializeField] private Text Description;
@@ -14,6 +15,7 @@ public class UpgradeDisplay : MonoBehaviour
     [SerializeField] private Text EffectDescriptionPrefab;
 
     [HideInInspector] public Simulation Simulation;
+    [HideInInspector] public Timeline Timeline;
     [HideInInspector] public Upgrade Upgrade;
 
     private void Start()
@@ -58,5 +60,15 @@ public class UpgradeDisplay : MonoBehaviour
     private void BuyUpgrade()
     {
         Simulation.BuyUpgrade(Upgrade);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Timeline.PreviewUpgrade(Upgrade);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Timeline.EndUpgradePreview();
     }
 }

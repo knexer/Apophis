@@ -450,6 +450,7 @@ MonoBehaviour:
   EffectDescriptionPrefab: {fileID: 5091560497126959959, guid: 27698ba1c265d524b83e9fa2d87de51a,
     type: 3}
   Simulation: {fileID: 0}
+  Timeline: {fileID: 0}
   Upgrade: {fileID: 0}
 --- !u!114 &2627465696992651076
 MonoBehaviour:
