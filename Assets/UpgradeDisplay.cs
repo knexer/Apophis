@@ -10,6 +10,8 @@ public class UpgradeDisplay : MonoBehaviour
     [SerializeField] private Text Description;
     [SerializeField] private Text Cost;
     [SerializeField] private Text TimeToGet;
+    [SerializeField] private RectTransform EffectsContainer;
+    [SerializeField] private Text EffectDescriptionPrefab;
 
     [HideInInspector] public Simulation Simulation;
     [HideInInspector] public Upgrade Upgrade;
@@ -20,6 +22,14 @@ public class UpgradeDisplay : MonoBehaviour
         Description.text = Upgrade.Description;
         Cost.text = Upgrade.Cost.Select(cost => $"{cost.Amount} {cost.Type}")
             .Aggregate((aggregate, cost) => $"{aggregate}, {cost}");
+        IUpgradeEffect[] effects = Upgrade.GetComponents<IUpgradeEffect>();
+        EffectsContainer.gameObject.SetActive(effects.Length > 0);
+        foreach (IUpgradeEffect effect in effects)
+        {
+            Text effectDescription = Instantiate(EffectDescriptionPrefab, EffectsContainer, false);
+            effectDescription.text = effect.Describe();
+        }
+
         GetComponent<Button>().onClick.AddListener(BuyUpgrade);
 
         Simulation.OnSimChanged += UpdateDisplay;
