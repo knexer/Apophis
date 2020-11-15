@@ -18,9 +18,6 @@ public class Timeline : MonoBehaviour
     private void UpdateTimeline()
     {
         float nonForegroundWidth = Background.rect.width * (((float) sim.CurrentTime / sim.MaxTime) - 1);
-        Debug.Log((float)sim.CurrentTime / sim.MaxTime);
-        Debug.Log(Background.rect.width);
-        Debug.Log(Foreground.sizeDelta);
         Foreground.sizeDelta = new Vector2(nonForegroundWidth, Foreground.sizeDelta.y);
     }
 }

@@ -42,7 +42,7 @@ public class UpgradeDisplay : MonoBehaviour
             else TimeToGet.color = Color.Lerp(Color.red, Color.yellow, .5f);
         }
 
-        GetComponent<Button>().interactable = timeToGet != null;
+        GetComponent<Button>().interactable = timeToGet != null && !Simulation.IsLocked;
     }
 
     private void BuyUpgrade()

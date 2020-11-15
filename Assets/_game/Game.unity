@@ -770,6 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resources: {fileID: 340005922}
+  SimStepAnimationSeconds: 0.5
   CurrentTime: 0
   MaxTime: 100
 --- !u!1 &263954848
@@ -1182,7 +1183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
-  Amount: 10
+  Amount: 0
   Growth: 1
 --- !u!114 &340005922
 MonoBehaviour:
