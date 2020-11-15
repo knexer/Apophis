@@ -23,7 +23,6 @@ public class Timeline : MonoBehaviour
     private void UpdateTimeline()
     {
         UpdateTimelineElement(Foreground, sim.CurrentTime);
-        UpdateTimelineElement(Preview, 0);
     }
 
     public void PreviewUpgrade(Upgrade upgrade)
