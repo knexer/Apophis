@@ -14,7 +14,7 @@ public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private RectTransform EffectsContainer;
     [SerializeField] private Text EffectDescriptionPrefab;
 
-    [HideInInspector] public Simulation Simulation;
+    [HideInInspector] public SimulationManager Simulation;
     [HideInInspector] public Timeline Timeline;
     [HideInInspector] public Upgrade Upgrade;
 

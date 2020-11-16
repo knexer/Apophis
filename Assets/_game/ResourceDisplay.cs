@@ -12,7 +12,7 @@ public class ResourceDisplay : MonoBehaviour
     [SerializeField] private Text Amount;
     [SerializeField] private Text Growth;
 
-    public Simulation Simulation;
+    public SimulationManager Simulation;
     private Resource resource;
 
     private void Start()

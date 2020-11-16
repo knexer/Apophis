@@ -209,6 +209,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853358}
   m_CullTransparentMesh: 0
+--- !u!1 &44160432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 44160434}
+  - component: {fileID: 44160433}
+  m_Layer: 0
+  m_Name: Game State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &44160433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44160432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c67791e5f00c9c43988a19c1a1b6e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sim: {fileID: 234400068}
+  SimStepAnimationSeconds: 0.5
+--- !u!4 &44160434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44160432}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 472.9225, y: 202.18243, z: -91.030136}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 234400067}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &55618668
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +565,7 @@ MonoBehaviour:
   UpgradeParent: {fileID: 427354686}
   UpgradeDisplayPrefab: {fileID: 4551765599232423353, guid: 049eac0934c6c6a4794845a2b01553b7,
     type: 3}
-  Simulation: {fileID: 234400068}
+  Simulation: {fileID: 44160433}
   Timeline: {fileID: 1210145387}
 --- !u!1 &174097116
 GameObject:
@@ -736,7 +782,7 @@ GameObject:
   - component: {fileID: 234400067}
   - component: {fileID: 234400068}
   m_Layer: 0
-  m_Name: Game State
+  m_Name: Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,14 +795,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234400066}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 472.9225, y: 202.18243, z: -91.030136}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 340005917}
   - {fileID: 427354687}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 44160434}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &234400068
 MonoBehaviour:
@@ -771,7 +817,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resources: {fileID: 340005922}
-  SimStepAnimationSeconds: 0.5
   CurrentTime: 0
   MaxTime: 100
 --- !u!1 &263954848
@@ -1761,7 +1806,7 @@ MonoBehaviour:
   Name: {fileID: 1514987258}
   Amount: {fileID: 769613235}
   Growth: {fileID: 484960866}
-  Simulation: {fileID: 234400068}
+  Simulation: {fileID: 44160433}
 --- !u!114 &537298775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3046,7 +3091,7 @@ MonoBehaviour:
   Name: {fileID: 1565925406}
   Amount: {fileID: 990651448}
   Growth: {fileID: 921612778}
-  Simulation: {fileID: 234400068}
+  Simulation: {fileID: 44160433}
 --- !u!1 &1145241507
 GameObject:
   m_ObjectHideFlags: 0
@@ -3348,7 +3393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c171d96fde7a7468dbdf0e7ba7785b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sim: {fileID: 234400068}
+  sim: {fileID: 44160433}
   Background: {fileID: 719623961}
   Foreground: {fileID: 494971723}
   Preview: {fileID: 972633531}
@@ -3547,7 +3592,7 @@ MonoBehaviour:
   Name: {fileID: 1592111341}
   Amount: {fileID: 911751423}
   Growth: {fileID: 566966315}
-  Simulation: {fileID: 234400068}
+  Simulation: {fileID: 44160433}
 --- !u!114 &1414855209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4896,7 +4941,7 @@ MonoBehaviour:
   Name: {fileID: 290146441}
   Amount: {fileID: 2111716602}
   Growth: {fileID: 959463357}
-  Simulation: {fileID: 234400068}
+  Simulation: {fileID: 44160433}
 --- !u!114 &1948961234
 MonoBehaviour:
   m_ObjectHideFlags: 0

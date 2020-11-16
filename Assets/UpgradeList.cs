@@ -7,7 +7,7 @@ public class UpgradeList : MonoBehaviour
     [SerializeField] private RectTransform UpgradeDisplayParent;
     [SerializeField] private GameObject UpgradeParent;
     [SerializeField] private UpgradeDisplay UpgradeDisplayPrefab;
-    [SerializeField] private Simulation Simulation;
+    [SerializeField] private SimulationManager Simulation;
     [SerializeField] private Timeline Timeline;
 
     void Start()

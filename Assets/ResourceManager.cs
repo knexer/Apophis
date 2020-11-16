@@ -11,7 +11,7 @@ public class ResourceManager : MonoBehaviour
         return resources[type];
     }
 
-    private void Start()
+    private void Awake()
     {
         foreach (Resource resource in GetComponents<Resource>())
         {

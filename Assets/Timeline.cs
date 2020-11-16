@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Timeline : MonoBehaviour
 {
-    [SerializeField] private Simulation sim;
+    [SerializeField] private SimulationManager sim;
     [SerializeField] private RectTransform Background;
     [SerializeField] private RectTransform Foreground;
     [SerializeField] private RectTransform Preview;
@@ -23,7 +23,7 @@ public class Timeline : MonoBehaviour
 
     private void UpdateTimeline()
     {
-        UpdateTimelineElement(Foreground, sim.CurrentTime);
+        UpdateTimelineElement(Foreground, sim.Sim.CurrentTime);
     }
 
     public void PreviewUpgrade(Upgrade upgrade)
@@ -38,7 +38,7 @@ public class Timeline : MonoBehaviour
         lastPreviewTime = previewTime;
 
         // TODO show a different color/size if null
-        UpdateTimelineElement(Preview, sim.CurrentTime + previewTime ?? 0);
+        UpdateTimelineElement(Preview, sim.Sim.CurrentTime + previewTime ?? 0);
     }
 
     public void EndUpgradePreview()
@@ -58,7 +58,7 @@ public class Timeline : MonoBehaviour
 
     private void UpdateTimelineElement(RectTransform element, int timeToShow)
     {
-        float negativeWidth = Background.rect.width * (((float)timeToShow / sim.MaxTime) - 1);
+        float negativeWidth = Background.rect.width * (((float)timeToShow / sim.Sim.MaxTime) - 1);
         element.sizeDelta = new Vector2(negativeWidth, element.sizeDelta.y);
     }
 }
