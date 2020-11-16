@@ -18,6 +18,7 @@ public class Timeline : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         sim.OnSimChanged += UpdateTimeline;
         UpdateTimeline();
+        UpdateTimelineElement(Preview, 0);
     }
 
     private void UpdateTimeline()

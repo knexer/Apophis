@@ -1304,6 +1304,8 @@ Transform:
   m_Children:
   - {fileID: 1823432546}
   - {fileID: 1160651924}
+  - {fileID: 1728571464}
+  - {fileID: 573125654}
   m_Father: {fileID: 234400067}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1898,6 +1900,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566966312}
   m_CullTransparentMesh: 0
+--- !u!1 &573125653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 573125654}
+  - component: {fileID: 573125655}
+  - component: {fileID: 573125656}
+  m_Layer: 0
+  m_Name: Refinery
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &573125654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573125653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 427354687}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &573125655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573125653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Refinery
+  Description: Process volatiles into powerful fuel
+  Cost:
+  - Type: 0
+    Amount: 1000
+  - Type: 2
+    Amount: 10
+--- !u!114 &573125656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573125653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951a5b0eed65b624887c099907c05f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Effects:
+  - Type: 1
+    Amount: -100
+  - Type: 3
+    Amount: 1
 --- !u!1 &640984125
 GameObject:
   m_ObjectHideFlags: 0
@@ -3123,8 +3193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Mine Volatiles
-  Description: An eco-friendly reusable metal straw for sucking up that weird ice.
+  Name: Sublimator
+  Description: Collect various kinds of ice.
   Cost:
   - Type: 0
     Amount: 200
@@ -4255,6 +4325,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640870191}
   m_CullTransparentMesh: 0
+--- !u!1 &1728571463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1728571464}
+  - component: {fileID: 1728571468}
+  - component: {fileID: 1728571465}
+  m_Layer: 0
+  m_Name: Foundy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1728571464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728571463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 427354687}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1728571465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728571463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951a5b0eed65b624887c099907c05f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Effects:
+  - Type: 0
+    Amount: -10
+  - Type: 1
+    Amount: -1
+  - Type: 2
+    Amount: 1
+--- !u!114 &1728571468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728571463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Foundry
+  Description: Convert metal into complex parts and components
+  Cost:
+  - Type: 0
+    Amount: 500
+  - Type: 1
+    Amount: 10
 --- !u!1 &1733436572
 GameObject:
   m_ObjectHideFlags: 0
@@ -4604,8 +4744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Mine Faster
-  Description: Add another drill, I guess?
+  Name: Miner
+  Description: Add another drill to your probe
   Cost:
   - Type: 0
     Amount: 10
