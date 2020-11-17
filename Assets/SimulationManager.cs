@@ -11,9 +11,17 @@ public class SimulationManager : MonoBehaviour
     public bool IsLocked { get; private set; }
     public event Action OnSimChanged;
 
+    private readonly Dictionary<Upgrade, int?> memoizedUpgradeTimes = new Dictionary<Upgrade, int?>();
+
     private void Start()
     {
         Sim.BuyUpgrade(InitialUpgrade);
+        SimChanged();
+    }
+
+    private void SimChanged()
+    {
+        memoizedUpgradeTimes.Clear();
         OnSimChanged?.Invoke();
     }
 
@@ -22,7 +30,7 @@ public class SimulationManager : MonoBehaviour
         while (Sim.CurrentTime < nextTime)
         {
             Sim.AdvanceTime();
-            OnSimChanged?.Invoke();
+            SimChanged();
             yield return new WaitForSeconds(SimStepAnimationSeconds);
         }
     }
@@ -45,7 +53,7 @@ public class SimulationManager : MonoBehaviour
             yield return FastForwardTo(Sim.CurrentTime + timeToBuy.Value);
 
             Sim.BuyUpgrade(upgrade);
-            OnSimChanged?.Invoke();
+            SimChanged();
         }
         finally
         {
@@ -54,7 +62,7 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
-    public int? GetTimeToPurchase(Upgrade upgrade)
+    private int? GetTimeToPurchaseImpl(Upgrade upgrade)
     {
         if (Sim.CanBuyUpgrade(upgrade)) return 0;
         var copy = Instantiate(Sim.gameObject).GetComponent<Simulation>();
@@ -72,5 +80,12 @@ public class SimulationManager : MonoBehaviour
         {
             Destroy(copy.gameObject);
         }
+    }
+
+    public int? GetTimeToPurchase(Upgrade upgrade)
+    {
+        if (!memoizedUpgradeTimes.ContainsKey(upgrade))
+            return memoizedUpgradeTimes[upgrade] = GetTimeToPurchaseImpl(upgrade);
+        return memoizedUpgradeTimes[upgrade];
     }
 }
