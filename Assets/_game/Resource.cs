@@ -13,5 +13,6 @@ public enum ResourceType
     Metal,
     Volatiles,
     Components,
-    Fuel
+    Fuel,
+    Capacity
 }
