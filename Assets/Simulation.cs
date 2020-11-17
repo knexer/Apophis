@@ -12,13 +12,23 @@ public class Simulation : MonoBehaviour
     [HideInInspector] public int CurrentTime = 0;
     public int MaxTime;
 
+    [SerializeField, HideInInspector]
+    private List<Upgrade> boughtUpgrades = new List<Upgrade>();
+
     public void AdvanceTime()
     {
         CurrentTime++;
+
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
         {
             Resource resource = resources.GetResource(type);
-            resource.Amount += resource.Growth;
+            resource.Amount += resource.ChangeNextCycle;
+            resource.ChangeNextCycle = 0;
+        }
+
+        foreach (Upgrade upgrade in boughtUpgrades)
+        {
+            upgrade.Apply(this, resources);
         }
     }
 
@@ -39,6 +49,7 @@ public class Simulation : MonoBehaviour
             resource.Amount -= cost.Amount;
         }
 
-        upgrade.OnBought(this, resources);
+        boughtUpgrades.Add(upgrade);
+        upgrade.Apply(this, resources);
     }
 }

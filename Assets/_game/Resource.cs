@@ -6,7 +6,7 @@ public class Resource : MonoBehaviour
 {
     public ResourceType Type;
     public int Amount;
-    public int Growth; // TODO something more sophisticated to handle many kinds of modifiers to growth
+    public int ChangeNextCycle;
 }
 public enum ResourceType
 {

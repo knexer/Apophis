@@ -14,6 +14,6 @@ public class ResourceGrowthEffect : MonoBehaviour, IUpgradeEffect
 
     public void Apply(Simulation sim, ResourceManager resources)
     {
-        resources.GetResource(Type).Growth += Growth;
+        resources.GetResource(Type).ChangeNextCycle += Growth;
     }
 }

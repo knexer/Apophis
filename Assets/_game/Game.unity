@@ -240,6 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sim: {fileID: 234400068}
   SimStepAnimationSeconds: 0.5
+  InitialUpgrade: {fileID: 1271347877}
 --- !u!4 &44160434
 Transform:
   m_ObjectHideFlags: 0
@@ -252,6 +253,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 234400067}
+  - {fileID: 1271347875}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -781,6 +783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 234400067}
   - component: {fileID: 234400068}
+  - component: {fileID: 234400069}
   m_Layer: 0
   m_Name: Timeline
   m_TagString: Untagged
@@ -819,6 +822,21 @@ MonoBehaviour:
   resources: {fileID: 340005922}
   CurrentTime: 0
   MaxTime: 100
+  boughtUpgrades: []
+--- !u!114 &234400069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234400066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8fbc5b02f68bb4e8a2ea2ba535beaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
+  Growth: 1
 --- !u!1 &263954848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,7 +1248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   Amount: 0
-  Growth: 1
+  Growth: 0
 --- !u!114 &340005922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3433,6 +3451,67 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1271347874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1271347875}
+  - component: {fileID: 1271347877}
+  - component: {fileID: 1271347876}
+  m_Layer: 0
+  m_Name: Initial Upgrade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1271347875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271347874}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 44160434}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1271347876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271347874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8fbc5b02f68bb4e8a2ea2ba535beaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
+  Growth: 1
+--- !u!114 &1271347877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271347874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Probe Miner
+  Description: Mines a basic amount of metal ore from Apophis.
+  Cost: []
 --- !u!1 &1320851499
 GameObject:
   m_ObjectHideFlags: 0

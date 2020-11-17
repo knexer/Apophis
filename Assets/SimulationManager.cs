@@ -7,8 +7,15 @@ public class SimulationManager : MonoBehaviour
 {
     [SerializeField] public Simulation Sim;
     [SerializeField] private float SimStepAnimationSeconds;
+    [SerializeField] private Upgrade InitialUpgrade;
     public bool IsLocked { get; private set; }
     public event Action OnSimChanged;
+
+    private void Start()
+    {
+        Sim.BuyUpgrade(InitialUpgrade);
+        OnSimChanged?.Invoke();
+    }
 
     private IEnumerator FastForwardTo(int nextTime)
     {

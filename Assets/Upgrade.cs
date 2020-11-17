@@ -11,7 +11,7 @@ public class Upgrade : MonoBehaviour
 
     [SerializeField] public Cost[] Cost;
 
-    public void OnBought(Simulation sim, ResourceManager resources)
+    public void Apply(Simulation sim, ResourceManager resources)
     {
         foreach (IUpgradeEffect effect in GetComponents<IUpgradeEffect>())
         {
