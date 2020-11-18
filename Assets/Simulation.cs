@@ -15,6 +15,32 @@ public class Simulation : MonoBehaviour
     [SerializeField, HideInInspector]
     private List<Upgrade> boughtUpgrades = new List<Upgrade>();
 
+    [SerializeField, HideInInspector]
+    private List<Upgrade> queuedUpgrades = new List<Upgrade>();
+
+    public IEnumerable<Upgrade> UpgradeQueue => boughtUpgrades.Concat(queuedUpgrades);
+
+    public void QueueUpgrades(IEnumerable<Upgrade> upgrades)
+    {
+        queuedUpgrades.AddRange(upgrades);
+
+        BuyQueuedUpgrades();
+        RecalculateNextCycle();
+    }
+
+    private void RecalculateNextCycle()
+    {
+        foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
+        {
+            resources.GetResource(type).ChangeNextCycle = 0;
+        }
+
+        foreach (Upgrade upgrade in boughtUpgrades)
+        {
+            upgrade.Apply(this, resources);
+        }
+    }
+
     public void AdvanceTime()
     {
         CurrentTime++;
@@ -23,12 +49,18 @@ public class Simulation : MonoBehaviour
         {
             Resource resource = resources.GetResource(type);
             resource.Amount += resource.ChangeNextCycle;
-            resource.ChangeNextCycle = 0;
         }
 
-        foreach (Upgrade upgrade in boughtUpgrades)
+        BuyQueuedUpgrades();
+        RecalculateNextCycle();
+    }
+
+    private void BuyQueuedUpgrades()
+    {
+        while (queuedUpgrades.Count > 0 && CanBuyUpgrade(queuedUpgrades.First()))
         {
-            upgrade.Apply(this, resources);
+            BuyUpgrade(queuedUpgrades.First());
+            queuedUpgrades.RemoveAt(0);
         }
     }
 
@@ -50,6 +82,7 @@ public class Simulation : MonoBehaviour
         }
 
         boughtUpgrades.Add(upgrade);
-        upgrade.Apply(this, resources);
+
+        RecalculateNextCycle();
     }
 }

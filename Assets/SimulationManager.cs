@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SimulationManager : MonoBehaviour
@@ -15,7 +16,7 @@ public class SimulationManager : MonoBehaviour
 
     private void Start()
     {
-        Sim.BuyUpgrade(InitialUpgrade);
+        Sim.QueueUpgrades(Enumerable.Repeat(InitialUpgrade, 1));
         SimChanged();
     }
 
