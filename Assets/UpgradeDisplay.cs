@@ -22,8 +22,8 @@ public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         Name.text = Upgrade.Name;
         Description.text = Upgrade.Description;
-        Cost.text = Upgrade.Cost.Select(cost => $"{cost.Amount} {cost.Type}")
-            .Aggregate((aggregate, cost) => $"{aggregate}, {cost}");
+        Cost.text = Upgrade.Cost.Select(cost => cost.Abs().ToString())
+            .Aggregate((left, right) => $"{left}, {right}");
         IUpgradeEffect[] effects = Upgrade.GetComponents<IUpgradeEffect>();
         EffectsContainer.gameObject.SetActive(effects.Length > 0);
         foreach (IUpgradeEffect effect in effects)

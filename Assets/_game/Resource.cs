@@ -14,5 +14,6 @@ public enum ResourceType
     Volatiles,
     Components,
     Fuel,
-    Capacity
+    Capacity,
+    Deflection
 }

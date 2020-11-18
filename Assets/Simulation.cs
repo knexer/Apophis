@@ -66,19 +66,18 @@ public class Simulation : MonoBehaviour
 
     public bool CanBuyUpgrade(Upgrade upgrade)
     {
-        return upgrade.Cost.All(cost => resources.GetResource(cost.Type).Amount >= cost.Amount);
+        return upgrade.Cost.All(resources.CanApplyImmediate);
     }
 
     public void BuyUpgrade(Upgrade upgrade)
     {
-        foreach (Cost cost in upgrade.Cost)
+        foreach (ResourceDelta cost in upgrade.Cost)
         {
-            Resource resource = resources.GetResource(cost.Type);
-            if (resource.Amount < cost.Amount)
+            if (!resources.CanApplyImmediate(cost))
                 throw new Exception(
-                    $"Expected at least {cost.Amount} of {cost.Type}, found only {resource.Amount}." +
+                    $"Expected at least {cost.Amount} of {cost.Type}, found only {resources.GetResource(cost.Type).Amount}." +
                     $"This should not happen, because we should have fastforwarded until there was enough!");
-            resource.Amount -= cost.Amount;
+            resources.ApplyImmediate(cost);
         }
 
         boughtUpgrades.Add(upgrade);

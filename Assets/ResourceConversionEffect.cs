@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class ResourceConversionEffect : MonoBehaviour, IUpgradeEffect
 {
-    [SerializeField] private Cost[] Effects;
+    [SerializeField] private ResourceDelta[] Effects;
     public string Describe()
     {
-        string costs = Effects.Where(effect => effect.Amount < 0).Select(effect => $"{-effect.Amount} {effect.Type}")
+        string costs = Effects.Where(effect => effect.Amount < 0).Select(effect => effect.Abs().ToString())
             .Aggregate((left, right) => $"{left} and {right}");
-        string results = Effects.Where(effect => effect.Amount > 0).Select(effect => $"{effect.Amount} {effect.Type}")
+        string results = Effects.Where(effect => effect.Amount > 0).Select(effect => effect.ToString())
             .Aggregate((left, right) => $"{left} and {right}");
         return $"Each cycle, convert {costs} into {results}.";
     }
@@ -20,12 +20,11 @@ public class ResourceConversionEffect : MonoBehaviour, IUpgradeEffect
     public void Apply(Simulation sim, ResourceManager resources)
     {
         // Don't convert if some input is not present in sufficient quantity.
-        if (Effects.Where(effect => effect.Amount < 0)
-            .Any(effect => resources.GetResource(effect.Type).Amount < Mathf.Abs(effect.Amount)))
+        if (!Effects.All(resources.CanApplyNextCycle))
             return;
-        foreach (Cost effect in Effects)
+        foreach (ResourceDelta effect in Effects)
         {
-            resources.GetResource(effect.Type).ChangeNextCycle += effect.Amount;
+            resources.ApplyNextCycle(effect);
         }
     }
 }

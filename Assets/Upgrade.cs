@@ -9,7 +9,7 @@ public class Upgrade : MonoBehaviour
 
     [SerializeField] public string Description;
 
-    [SerializeField] public Cost[] Cost;
+    [SerializeField] public ResourceDelta[] Cost;
 
     public void Apply(Simulation sim, ResourceManager resources)
     {
@@ -21,8 +21,15 @@ public class Upgrade : MonoBehaviour
 }
 
 [Serializable]
-public class Cost
+public class ResourceDelta
 {
     public ResourceType Type;
     public int Amount;
+
+    public ResourceDelta Abs() => new ResourceDelta() {Type = Type, Amount = Mathf.Abs(Amount)};
+
+    public override string ToString()
+    {
+        return $"{Amount} {Type}";
+    }
 }

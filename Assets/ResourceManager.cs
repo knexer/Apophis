@@ -18,4 +18,28 @@ public class ResourceManager : MonoBehaviour
             resources[resource.Type] = resource;
         }
     }
+
+    public bool CanApplyNextCycle(ResourceDelta delta)
+    {
+        Resource resource = GetResource(delta.Type);
+        return resource.Amount + resource.ChangeNextCycle + delta.Amount >= 0;
+    }
+
+    public bool CanApplyImmediate(ResourceDelta delta)
+    {
+        Resource resource = GetResource(delta.Type);
+        return resource.Amount + delta.Amount >= 0;
+    }
+
+    public void ApplyNextCycle(ResourceDelta delta)
+    {
+        Resource resource = GetResource(delta.Type);
+        resource.ChangeNextCycle += delta.Amount;
+    }
+
+    public void ApplyImmediate(ResourceDelta delta)
+    {
+        Resource resource = GetResource(delta.Type);
+        resource.Amount += delta.Amount;
+    }
 }
