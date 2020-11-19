@@ -13,11 +13,9 @@ public class ResourceDisplay : MonoBehaviour
     [SerializeField] private Text Growth;
 
     public SimulationManager Simulation;
-    private Resource resource;
 
     private void Start()
     {
-        resource = FindObjectsOfType<Resource>().First(res => res.Type == Type);
         Name.text = Type.ToString();
 
         Simulation.OnSimChanged += UpdateResource;
@@ -26,6 +24,7 @@ public class ResourceDisplay : MonoBehaviour
 
     private void UpdateResource()
     {
+        Resource resource = Simulation.Sim.resources.GetResource(Type);
         Amount.text = resource.Amount.ToString();
         Growth.text = $"{(resource.ChangeNextCycle > 0 ? "+" : "")}{resource.ChangeNextCycle}/cycle";
     }

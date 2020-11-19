@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Simulation : MonoBehaviour
 {
-    [SerializeField] private ResourceManager resources;
+    [SerializeField] public ResourceManager resources;
 
     // Handles the passage of time.
     [HideInInspector] public int CurrentTime = 0;

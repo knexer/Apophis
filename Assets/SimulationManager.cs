@@ -9,8 +9,10 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] public Simulation Sim;
     [SerializeField] private float SimStepAnimationSeconds;
     [SerializeField] private Upgrade InitialUpgrade;
+    [SerializeField] private GameObject UpgradeContainer;
     public bool IsLocked { get; private set; }
     public event Action OnSimChanged;
+    public IEnumerable<Upgrade> AvailableUpgrades => UpgradeContainer.GetComponentsInChildren<Upgrade>();
 
     private readonly Dictionary<Upgrade, int?> memoizedUpgradeTimes = new Dictionary<Upgrade, int?>();
 
@@ -20,10 +22,19 @@ public class SimulationManager : MonoBehaviour
         SimChanged();
     }
 
-    private void SimChanged()
+    private void UpdateUpgradePurchaseTimes()
     {
         memoizedUpgradeTimes.Clear();
-        OnSimChanged?.Invoke();
+        foreach (var upgrade in AvailableUpgrades)
+        {
+            memoizedUpgradeTimes.Add(upgrade, GetTimeToPurchaseImpl(upgrade));
+        }
+    }
+
+    private void SimChanged()
+    {
+        UpdateUpgradePurchaseTimes();
+           OnSimChanged?.Invoke();
     }
 
     private IEnumerator FastForwardTo(int nextTime)
@@ -34,6 +45,11 @@ public class SimulationManager : MonoBehaviour
             SimChanged();
             yield return new WaitForSeconds(SimStepAnimationSeconds);
         }
+    }
+
+    public IEnumerator FastForwardToEnd()
+    {
+        yield return FastForwardTo(Sim.MaxTime);
     }
 
     public void BuyUpgrade(Upgrade upgrade)
@@ -85,8 +101,8 @@ public class SimulationManager : MonoBehaviour
 
     public int? GetTimeToPurchase(Upgrade upgrade)
     {
-        if (!memoizedUpgradeTimes.ContainsKey(upgrade))
-            return memoizedUpgradeTimes[upgrade] = GetTimeToPurchaseImpl(upgrade);
-        return memoizedUpgradeTimes[upgrade];
+        if (memoizedUpgradeTimes.ContainsKey(upgrade))
+            return memoizedUpgradeTimes[upgrade];
+        return null;
     }
 }
