@@ -24,7 +24,7 @@ public class ResourceDisplay : MonoBehaviour
 
     private void UpdateResource()
     {
-        Resource resource = Simulation.Sim.resources.GetResource(Type);
+        Resource resource = Simulation.CurrentSim.resources.GetResource(Type);
         Amount.text = resource.Amount.ToString();
         Growth.text = $"{(resource.ChangeNextCycle > 0 ? "+" : "")}{resource.ChangeNextCycle}/cycle";
     }

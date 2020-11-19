@@ -15,18 +15,22 @@ public class TimelineOverModal : MonoBehaviour
     void Start()
     {
         Sim.OnSimChanged += MaybeShowModal;
+        GetComponent<ModalWindowManager>().onConfirm.AddListener(StartNewTimeline);
+    }
+
+    private void StartNewTimeline()
+    {
+        Sim.StartNewTimeline();
+        fastForwarding = false;
     }
 
     private void MaybeShowModal()
     {
         if (fastForwarding == true) return;
-        // If can't buy any upgrades
         if (Sim.AvailableUpgrades.All(upgrade => Sim.GetTimeToPurchase(upgrade) == null))
         {
             StartCoroutine(ShowModal());
         }
-        // Fast-forward to end
-        // Open modal
     }
 
     private IEnumerator ShowModal()
@@ -34,11 +38,5 @@ public class TimelineOverModal : MonoBehaviour
         fastForwarding = true;
         yield return Sim.FastForwardToEnd();
         GetComponent<ModalWindowManager>().OpenWindow();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

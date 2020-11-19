@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class SimulationManager : MonoBehaviour
 {
-    [SerializeField] public Simulation Sim;
+    [SerializeField] private Simulation SimPrefab;
     [SerializeField] private float SimStepAnimationSeconds;
     [SerializeField] private Upgrade InitialUpgrade;
     [SerializeField] private GameObject UpgradeContainer;
+    private List<Simulation> PreviousSims = new List<Simulation>();
+    [HideInInspector] public Simulation CurrentSim;
     public bool IsLocked { get; private set; }
     public event Action OnSimChanged;
     public IEnumerable<Upgrade> AvailableUpgrades => UpgradeContainer.GetComponentsInChildren<Upgrade>();
@@ -18,8 +20,7 @@ public class SimulationManager : MonoBehaviour
 
     private void Start()
     {
-        Sim.QueueUpgrades(Enumerable.Repeat(InitialUpgrade, 1));
-        SimChanged();
+        StartNewTimeline();
     }
 
     private void UpdateUpgradePurchaseTimes()
@@ -34,22 +35,39 @@ public class SimulationManager : MonoBehaviour
     private void SimChanged()
     {
         UpdateUpgradePurchaseTimes();
-           OnSimChanged?.Invoke();
+        OnSimChanged?.Invoke();
     }
 
     private IEnumerator FastForwardTo(int nextTime)
     {
-        while (Sim.CurrentTime < nextTime)
+        while (CurrentSim.CurrentTime < nextTime)
         {
-            Sim.AdvanceTime();
+            CurrentSim.AdvanceTime();
             SimChanged();
             yield return new WaitForSeconds(SimStepAnimationSeconds);
         }
     }
+    public void StartNewTimeline()
+    {
+        if (CurrentSim != null)
+        {
+            PreviousSims.Add(CurrentSim);
+        }
+        CurrentSim = Instantiate(SimPrefab);
+        CurrentSim.QueueUpgrades(Enumerable.Repeat(InitialUpgrade, 1));
+        for (int i = 0; i < PreviousSims.Count; i++){
+            Simulation replacementSim = Instantiate(SimPrefab);
+            Simulation previousSim = PreviousSims[i];
+            replacementSim.QueueUpgrades(previousSim.UpgradeQueue);
+            PreviousSims[i] = replacementSim;
+            Destroy(previousSim);
+        }
+        SimChanged();
+    }
 
     public IEnumerator FastForwardToEnd()
     {
-        yield return FastForwardTo(Sim.MaxTime);
+        yield return FastForwardTo(CurrentSim.MaxTime);
     }
 
     public void BuyUpgrade(Upgrade upgrade)
@@ -67,9 +85,9 @@ public class SimulationManager : MonoBehaviour
             if (timeToBuy == null)
                 throw new ArgumentException($"Upgrade {upgrade.name} can't be afforded before the end of time!");
 
-            yield return FastForwardTo(Sim.CurrentTime + timeToBuy.Value);
+            yield return FastForwardTo(CurrentSim.CurrentTime + timeToBuy.Value);
 
-            Sim.BuyUpgrade(upgrade);
+            CurrentSim.BuyUpgrade(upgrade);
             SimChanged();
         }
         finally
@@ -81,8 +99,8 @@ public class SimulationManager : MonoBehaviour
 
     private int? GetTimeToPurchaseImpl(Upgrade upgrade)
     {
-        if (Sim.CanBuyUpgrade(upgrade)) return 0;
-        var copy = Instantiate(Sim.gameObject).GetComponent<Simulation>();
+        if (CurrentSim.CanBuyUpgrade(upgrade)) return 0;
+        var copy = Instantiate(CurrentSim.gameObject).GetComponent<Simulation>();
         try
         {
             while (!copy.CanBuyUpgrade(upgrade) && copy.CurrentTime < copy.MaxTime)
@@ -90,7 +108,7 @@ public class SimulationManager : MonoBehaviour
                 copy.AdvanceTime();
             }
 
-            if (copy.CanBuyUpgrade(upgrade)) return copy.CurrentTime - Sim.CurrentTime;
+            if (copy.CanBuyUpgrade(upgrade)) return copy.CurrentTime - CurrentSim.CurrentTime;
             return null;
         }
         finally
