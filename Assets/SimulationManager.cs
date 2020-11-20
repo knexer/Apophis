@@ -87,6 +87,7 @@ public class SimulationManager : MonoBehaviour
     {
         if (ActualSims.CurrentSim.CanBuyUpgrade(upgrade)) return 0;
         var copy = Instantiate(ActualSims.gameObject).GetComponent<SimAggregate>();
+        copy.DoThatHackyThang();
         try
         {
             while (!copy.CurrentSim.CanBuyUpgrade(upgrade) && copy.CurrentSim.CurrentTime < copy.CurrentSim.MaxTime)

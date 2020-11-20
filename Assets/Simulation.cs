@@ -13,12 +13,14 @@ public class Simulation : MonoBehaviour
     public int MaxTime;
 
     [SerializeField, HideInInspector]
-    private List<Upgrade> boughtUpgrades = new List<Upgrade>();
+    public List<Upgrade> boughtUpgrades = new List<Upgrade>();
 
     [SerializeField, HideInInspector]
     private List<Upgrade> queuedUpgrades = new List<Upgrade>();
 
     public IEnumerable<Upgrade> UpgradeQueue => boughtUpgrades.Concat(queuedUpgrades);
+
+    public Func<IEnumerable<Upgrade>> AllUpgradesCallback;
 
     public void QueueUpgrades(IEnumerable<Upgrade> upgrades)
     {
@@ -28,14 +30,14 @@ public class Simulation : MonoBehaviour
         RecalculateNextCycle();
     }
 
-    private void RecalculateNextCycle()
+    public void RecalculateNextCycle()
     {
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
         {
             resources.GetResource(type).ChangeNextCycle = 0;
         }
 
-        foreach (Upgrade upgrade in boughtUpgrades)
+        foreach (Upgrade upgrade in AllUpgradesCallback())
         {
             upgrade.Apply(this, resources);
         }
