@@ -16,6 +16,7 @@ public class TimelineOverModal : MonoBehaviour
     {
         Sim.OnSimChanged += MaybeShowModal;
         GetComponent<ModalWindowManager>().onConfirm.AddListener(StartNewTimeline);
+        GetComponent<ModalWindowManager>().onCancel.AddListener(StartNewTimeline);
     }
 
     private void StartNewTimeline()
