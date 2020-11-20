@@ -8159,7 +8159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OperatingCost:
     Type: 3
-    Amount: 100
+    Amount: -100
 --- !u!114 &1772552956
 MonoBehaviour:
   m_ObjectHideFlags: 0
