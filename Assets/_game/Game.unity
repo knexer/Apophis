@@ -242,12 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c67791e5f00c9c43988a19c1a1b6e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SimPrefab: {fileID: 1905245576416076770, guid: 54bcc5087ff6188429520ba178c23c71,
-    type: 3}
+  ActualSims: {fileID: 603584893}
   SimStepAnimationSeconds: 0.5
-  InitialUpgrade: {fileID: 1271347877}
   UpgradeContainer: {fileID: 427354686}
-  CurrentSim: {fileID: 0}
 --- !u!4 &44160434
 Transform:
   m_ObjectHideFlags: 0
@@ -261,6 +258,7 @@ Transform:
   m_Children:
   - {fileID: 1271347875}
   - {fileID: 427354687}
+  - {fileID: 603584892}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -432,7 +430,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 15, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &55618668
@@ -3000,6 +2998,54 @@ MonoBehaviour:
     Amount: -100
   - Type: 3
     Amount: 1
+--- !u!1 &603584891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 603584892}
+  - component: {fileID: 603584893}
+  m_Layer: 0
+  m_Name: Timelines
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &603584892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603584891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 44160434}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &603584893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603584891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7769e72a70233cc4997ba165e0db562a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SimPrefab: {fileID: 1905245576416076770, guid: 54bcc5087ff6188429520ba178c23c71,
+    type: 3}
+  InitialUpgrade: {fileID: 1271347877}
+  CurrentSim: {fileID: 0}
+  PreviousSims: []
 --- !u!1 &603794303
 GameObject:
   m_ObjectHideFlags: 0
@@ -5357,7 +5403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 803, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 826, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160550850
@@ -7575,8 +7621,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 413, y: 0}
-  m_SizeDelta: {x: 786, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1672631411
 MonoBehaviour:

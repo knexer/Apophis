@@ -23,7 +23,7 @@ public class Timeline : MonoBehaviour
 
     private void UpdateTimeline()
     {
-        UpdateTimelineElement(Foreground, sim.CurrentSim.CurrentTime);
+        UpdateTimelineElement(Foreground, sim.ActualSims.CurrentSim.CurrentTime);
     }
 
     public void PreviewUpgrade(Upgrade upgrade)
@@ -38,7 +38,7 @@ public class Timeline : MonoBehaviour
         lastPreviewTime = previewTime;
 
         // TODO show a different color/size if null
-        UpdateTimelineElement(Preview, sim.CurrentSim.CurrentTime + previewTime ?? 0);
+        UpdateTimelineElement(Preview, sim.ActualSims.CurrentSim.CurrentTime + previewTime ?? 0);
     }
 
     public void EndUpgradePreview()
@@ -58,7 +58,7 @@ public class Timeline : MonoBehaviour
 
     private void UpdateTimelineElement(RectTransform element, int timeToShow)
     {
-        float negativeWidth = Background.rect.width * (((float)timeToShow / sim.CurrentSim.MaxTime) - 1);
+        float negativeWidth = Background.rect.width * (((float)timeToShow / sim.ActualSims.CurrentSim.MaxTime) - 1);
         element.sizeDelta = new Vector2(negativeWidth, element.sizeDelta.y);
     }
 }
