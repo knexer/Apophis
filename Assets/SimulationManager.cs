@@ -8,6 +8,8 @@ public class SimulationManager : MonoBehaviour
 {
     [SerializeField] public SimAggregate ActualSims;
     [SerializeField] private float SimStepAnimationSeconds;
+    [SerializeField] private float SimStepAnimationSpeedupRatioPerStep;
+    [SerializeField] private float SimStepAnimationMinSeconds;
     [SerializeField] private GameObject UpgradeContainer;
     public bool IsLocked { get; private set; }
     public event Action OnSimChanged;
@@ -56,11 +58,17 @@ public class SimulationManager : MonoBehaviour
 
     private IEnumerator FastForwardTo(int nextTime)
     {
+        float initialTime = Time.time;
+        int initialTimeStep = ActualSims.CurrentSim.CurrentTime;
         while (ActualSims.CurrentSim.CurrentTime < nextTime)
         {
             ActualSims.AdvanceTime();
             OnSimChanged?.Invoke();
-            yield return new WaitForSeconds(SimStepAnimationSeconds);
+
+            float acceleratingSpeed = Mathf.Pow(SimStepAnimationSpeedupRatioPerStep, ActualSims.CurrentSim.CurrentTime - initialTimeStep);
+            float deceleratingSpeed = Mathf.Pow(SimStepAnimationSpeedupRatioPerStep, nextTime - ActualSims.CurrentSim.CurrentTime);
+            float speed = Mathf.Min(acceleratingSpeed, deceleratingSpeed);
+            yield return new WaitForSeconds(Mathf.Max(SimStepAnimationSeconds / speed, SimStepAnimationMinSeconds));
         }
     }
     public void StartNewTimeline()
