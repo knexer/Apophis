@@ -59,7 +59,7 @@ public class SimulationManager : MonoBehaviour
         while (ActualSims.CurrentSim.CurrentTime < nextTime)
         {
             ActualSims.AdvanceTime();
-            SimChanged();
+            OnSimChanged?.Invoke();
             yield return new WaitForSeconds(SimStepAnimationSeconds);
         }
     }
