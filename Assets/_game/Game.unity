@@ -8179,6 +8179,8 @@ MonoBehaviour:
     Amount: -10000
   - Type: 2
     Amount: -250
+  - Type: 4
+    Amount: -1
 --- !u!1 &1779928825
 GameObject:
   m_ObjectHideFlags: 0
