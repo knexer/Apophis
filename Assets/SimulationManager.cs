@@ -22,11 +22,29 @@ public class SimulationManager : MonoBehaviour
 
     private void UpdateUpgradePurchaseTimes()
     {
-        // TODO do one sim forward, collecting upgrade times as you go, instead of one per upgrade
         memoizedUpgradeTimes.Clear();
-        foreach (var upgrade in AvailableUpgrades)
+        foreach (Upgrade upgrade in AvailableUpgrades)
         {
-            memoizedUpgradeTimes.Add(upgrade, GetTimeToPurchaseImpl(upgrade));
+            if (memoizedUpgradeTimes.ContainsKey(upgrade)) continue;
+            if (ActualSims.CurrentSim.CanBuyUpgrade(upgrade)) memoizedUpgradeTimes[upgrade] = ActualSims.CurrentSim.CurrentTime;
+        }
+        var copy = Instantiate(ActualSims.gameObject).GetComponent<SimAggregate>();
+        copy.DoThatHackyThang();
+        try
+        {
+            while (!AvailableUpgrades.All(memoizedUpgradeTimes.ContainsKey) && copy.CurrentSim.CurrentTime < copy.CurrentSim.MaxTime)
+            {
+                copy.AdvanceTime();
+                foreach (Upgrade upgrade in AvailableUpgrades)
+                {
+                    if (memoizedUpgradeTimes.ContainsKey(upgrade)) continue;
+                    if (copy.CurrentSim.CanBuyUpgrade(upgrade)) memoizedUpgradeTimes[upgrade] = copy.CurrentSim.CurrentTime;
+                }
+            }
+        }
+        finally
+        {
+            Destroy(copy.gameObject);
         }
     }
 
@@ -83,31 +101,10 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
-    private int? GetTimeToPurchaseImpl(Upgrade upgrade)
-    {
-        if (ActualSims.CurrentSim.CanBuyUpgrade(upgrade)) return 0;
-        var copy = Instantiate(ActualSims.gameObject).GetComponent<SimAggregate>();
-        copy.DoThatHackyThang();
-        try
-        {
-            while (!copy.CurrentSim.CanBuyUpgrade(upgrade) && copy.CurrentSim.CurrentTime < copy.CurrentSim.MaxTime)
-            {
-                copy.AdvanceTime();
-            }
-
-            if (copy.CurrentSim.CanBuyUpgrade(upgrade)) return copy.CurrentSim.CurrentTime - ActualSims.CurrentSim.CurrentTime;
-            return null;
-        }
-        finally
-        {
-            Destroy(copy.gameObject);
-        }
-    }
-
     public int? GetTimeToPurchase(Upgrade upgrade)
     {
         if (memoizedUpgradeTimes.ContainsKey(upgrade))
-            return memoizedUpgradeTimes[upgrade];
+            return memoizedUpgradeTimes[upgrade] - ActualSims.CurrentSim.CurrentTime;
         return null;
     }
 }
