@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,11 +9,11 @@ using UnityEngine.UI;
 public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Text Name;
-    [SerializeField] private Text Description;
-    [SerializeField] private Text Cost;
+    [SerializeField] private TMP_Text Description;
+    [SerializeField] private TMP_Text Cost;
     [SerializeField] private Text TimeToGet;
     [SerializeField] private RectTransform EffectsContainer;
-    [SerializeField] private Text EffectDescriptionPrefab;
+    [SerializeField] private TMP_Text EffectDescriptionPrefab;
 
     [HideInInspector] public SimulationManager Simulation;
     [HideInInspector] public Timeline Timeline;
@@ -28,7 +29,7 @@ public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         EffectsContainer.gameObject.SetActive(effects.Length > 0);
         foreach (IUpgradeEffect effect in effects)
         {
-            Text effectDescription = Instantiate(EffectDescriptionPrefab, EffectsContainer, false);
+            TMP_Text effectDescription = Instantiate(EffectDescriptionPrefab, EffectsContainer, false);
             effectDescription.text = effect.Describe();
         }
 
