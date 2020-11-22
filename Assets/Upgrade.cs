@@ -11,9 +11,16 @@ public class Upgrade : MonoBehaviour
 
     [SerializeField] public ResourceDelta[] Cost;
 
+    private IUpgradeEffect[] effects;
+
+    private void Awake()
+    {
+        effects = GetComponents<IUpgradeEffect>();
+    }
+
     public void Apply(Simulation sim, ResourceManager resources)
     {
-        foreach (IUpgradeEffect effect in GetComponents<IUpgradeEffect>())
+        foreach (IUpgradeEffect effect in effects)
         {
             effect.Apply(sim, resources);
         }

@@ -32,9 +32,9 @@ public class Simulation : MonoBehaviour
 
     public void RecalculateNextCycle()
     {
-        foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
+        foreach (Resource resource in resources.Resources)
         {
-            resources.GetResource(type).ChangeNextCycle = 0;
+            resource.ChangeNextCycle = 0;
         }
 
         foreach (Upgrade upgrade in AllUpgradesCallback())
@@ -47,9 +47,8 @@ public class Simulation : MonoBehaviour
     {
         CurrentTime++;
 
-        foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
+        foreach (Resource resource in resources.Resources)
         {
-            Resource resource = resources.GetResource(type);
             resource.Amount += resource.ChangeNextCycle;
         }
 

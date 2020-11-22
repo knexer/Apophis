@@ -6,6 +6,8 @@ public class ResourceManager : MonoBehaviour
 {
     private readonly Dictionary<ResourceType, Resource> resources = new Dictionary<ResourceType, Resource>();
 
+    public IEnumerable<Resource> Resources => resources.Values;
+
     public Resource GetResource(ResourceType type)
     {
         return resources[type];
