@@ -37,6 +37,6 @@ public class ResourceDelta
 
     public override string ToString()
     {
-        return $"{Amount} {Type}";
+        return $"{Amount} {ResourceTypeConfig.configs[Type].NameAndIcon}";
     }
 }
