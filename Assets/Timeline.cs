@@ -9,9 +9,12 @@ public class Timeline : MonoBehaviour
     [SerializeField] private RectTransform Background;
     [SerializeField] private RectTransform Foreground;
     [SerializeField] private RectTransform Preview;
+    [SerializeField] private RectTransform UpgradeBuiltBoxPrefab;
 
     private int numPreviews = 0;
     private int? lastPreviewTime = 0;
+
+    private List<RectTransform> UpgradeIndicatorBoxes = new List<RectTransform>();
 
     void Start()
     {
@@ -23,7 +26,19 @@ public class Timeline : MonoBehaviour
 
     private void UpdateTimeline()
     {
+        foreach (RectTransform box in UpgradeIndicatorBoxes)
+        {
+            Destroy(box.gameObject);
+        }
+        UpgradeIndicatorBoxes.Clear();
         UpdateTimelineElement(Foreground, sim.ActualSims.CurrentSim.CurrentTime);
+        for (int i = 0; i < sim.ActualSims.CurrentSim.boughtUpgrades.Count; i++)
+        {
+            RectTransform indicator = Instantiate(UpgradeBuiltBoxPrefab, transform, false);
+            int timeStepBuilt = sim.ActualSims.CurrentSim.boughtUpgradeTimes[i];
+            indicator.anchoredPosition = new Vector2(XPositionForTimestep(timeStepBuilt), 0);
+            UpgradeIndicatorBoxes.Add(indicator);
+        }
     }
 
     public void PreviewUpgrade(Upgrade upgrade)
@@ -56,9 +71,13 @@ public class Timeline : MonoBehaviour
         }
     }
 
+    private float XPositionForTimestep(int timeToShow)
+    {
+        return Background.rect.width * ((float)timeToShow / sim.ActualSims.CurrentSim.MaxTime);
+    }
+
     private void UpdateTimelineElement(RectTransform element, int timeToShow)
     {
-        float negativeWidth = Background.rect.width * (((float)timeToShow / sim.ActualSims.CurrentSim.MaxTime) - 1);
-        element.sizeDelta = new Vector2(negativeWidth, element.sizeDelta.y);
+        element.sizeDelta = new Vector2(XPositionForTimestep(timeToShow), element.sizeDelta.y);
     }
 }

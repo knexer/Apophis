@@ -14,6 +14,7 @@ public class Simulation : MonoBehaviour
 
     [SerializeField, HideInInspector]
     public List<Upgrade> boughtUpgrades = new List<Upgrade>();
+    public List<int> boughtUpgradeTimes = new List<int>();
 
     [SerializeField, HideInInspector]
     private List<Upgrade> queuedUpgrades = new List<Upgrade>();
@@ -82,6 +83,7 @@ public class Simulation : MonoBehaviour
         }
 
         boughtUpgrades.Add(upgrade);
+        boughtUpgradeTimes.Add(CurrentTime);
 
         RecalculateNextCycle();
     }
