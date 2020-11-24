@@ -13,17 +13,22 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Tooltip = Instantiate(TooltipPrefab);
-        Tooltip.SetTarget(this);
+        if (entries.Count > 0)
+        {
+            Tooltip = Instantiate(TooltipPrefab);
+            Tooltip.SetTarget(this);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Destroy(Tooltip.gameObject);
+        if (Tooltip != null)
+            Destroy(Tooltip.gameObject);
     }
 
     private void OnDestroy()
     {
-        Destroy(Tooltip.gameObject);
+        if (Tooltip != null)
+            Destroy(Tooltip.gameObject);
     }
 }

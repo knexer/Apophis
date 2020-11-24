@@ -35,9 +35,14 @@ public class TimelineElement : MonoBehaviour
             Background.color = FutureColor;
         }
 
-        if (sim.boughtUpgradeTimes.Contains(timeStep))
+        GetComponent<TooltipTarget>().entries.Clear();
+        for (int i = 0; i < sim.boughtUpgradeTimes.Count; i++)
         {
-            Background.color = UpgradeColor;
+            if (sim.boughtUpgradeTimes[i] == timeStep)
+            {
+                GetComponent<TooltipTarget>().entries.Add(sim.boughtUpgrades[i]);
+                Background.color = UpgradeColor;
+            }
         }
     }
 

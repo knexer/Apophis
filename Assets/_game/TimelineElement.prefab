@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 7799493602820106710}
   - component: {fileID: 170199769003691148}
   - component: {fileID: 3224294513438831153}
+  - component: {fileID: 8164376257941942825}
   m_Layer: 5
   m_Name: TimelineElement
   m_TagString: Untagged
@@ -215,3 +216,17 @@ MonoBehaviour:
   PreviewColor: {r: 0.627451, g: 0.76862746, b: 1, a: 1}
   UpgradePreviewColor: {r: 0.81960785, g: 1, b: 0.8, a: 1}
   Background: {fileID: 6999676269579756145}
+--- !u!114 &8164376257941942825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7190882369927970018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd73c47ea3250b418ef48705a48da54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipPrefab: {fileID: 3225104022942252842, guid: eab1b81cd4203754185e590355ac7bd5,
+    type: 3}
