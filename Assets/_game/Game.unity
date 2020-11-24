@@ -259,7 +259,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1271347875}
-  - {fileID: 427354687}
   - {fileID: 603584892}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1657,7 +1656,7 @@ Transform:
   - {fileID: 1728571464}
   - {fileID: 573125654}
   - {fileID: 1772552954}
-  m_Father: {fileID: 44160434}
+  m_Father: {fileID: 1047795275}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &441315627
@@ -2286,6 +2285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TooltipEntryPrefab: {fileID: 7557863382927013727, guid: 019c37df80a7d764f9dba4a605ff1e42,
+    type: 3}
   Name: Refinery
   Description: Process volatiles into powerful fuel
   Cost:
@@ -2341,7 +2342,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 44160434}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &603584893
 MonoBehaviour:
@@ -3384,10 +3385,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1047795274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 205.35042, y: 687.29376, z: -477.40085}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1945599146}
+  - {fileID: 427354687}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3831,6 +3833,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TooltipEntryPrefab: {fileID: 7557863382927013727, guid: 019c37df80a7d764f9dba4a605ff1e42,
+    type: 3}
   Name: Sublimator
   Description: Collect various kinds of ice.
   Cost:
@@ -4091,6 +4095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TooltipEntryPrefab: {fileID: 7557863382927013727, guid: 019c37df80a7d764f9dba4a605ff1e42,
+    type: 3}
   Name: Probe Miner
   Description: Mines a basic amount of metal ore from Apophis.
   Cost: []
@@ -5007,6 +5013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TooltipEntryPrefab: {fileID: 7557863382927013727, guid: 019c37df80a7d764f9dba4a605ff1e42,
+    type: 3}
   Name: Foundry
   Description: Convert metal into complex parts and components
   Cost:
@@ -5394,6 +5402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TooltipEntryPrefab: {fileID: 7557863382927013727, guid: 019c37df80a7d764f9dba4a605ff1e42,
+    type: 3}
   Name: Engine
   Description: A rocket to push the asteroid.
   Cost:
@@ -5710,6 +5720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335bb551365741e458d7ec668fce3bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TooltipEntryPrefab: {fileID: 7557863382927013727, guid: 019c37df80a7d764f9dba4a605ff1e42,
+    type: 3}
   Name: Miner
   Description: Add another drill to your probe
   Cost:
@@ -5861,7 +5873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00004028914}
+  m_AnchoredPosition: {x: -0.000004053116, y: -0.000011537814}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1929727189

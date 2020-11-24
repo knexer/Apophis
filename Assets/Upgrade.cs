@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Upgrade : MonoBehaviour
+public class Upgrade : MonoBehaviour, ITooltipEntry
 {
+    [SerializeField] private RectTransform TooltipEntryPrefab;
     [SerializeField] public string Name;
 
     [SerializeField] public string Description;
@@ -24,6 +26,11 @@ public class Upgrade : MonoBehaviour
         {
             effect.Apply(sim, resources);
         }
+    }
+
+    public void AddTooltipEntry(Tooltip host)
+    {
+        Instantiate(TooltipEntryPrefab, host.transform, false).GetComponentInChildren<TMP_Text>().text = Name;
     }
 }
 
