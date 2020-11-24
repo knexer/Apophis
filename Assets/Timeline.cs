@@ -6,44 +6,53 @@ using UnityEngine;
 public class Timeline : MonoBehaviour
 {
     [SerializeField] private SimulationManager sim;
-    [SerializeField] private RectTransform Background;
-    [SerializeField] private RectTransform Foreground;
-    [SerializeField] private RectTransform Preview;
+    [SerializeField] private TimelineElement timelineElementPrefab;
     [SerializeField] private RectTransform UpgradeBuiltBoxPrefab;
 
     private int numPreviews = 0;
     private int? lastPreviewTime = 0;
+    private Simulation lastCurrentSim;
 
-    private List<RectTransform> UpgradeIndicatorBoxes = new List<RectTransform>();
+    private List<TimelineElement> Elements = new List<TimelineElement>();
 
     void Start()
     {
         Canvas.ForceUpdateCanvases();
         sim.OnSimChanged += UpdateTimeline;
         UpdateTimeline();
-        UpdateTimelineElement(Preview, 0);
     }
 
     private void UpdateTimeline()
     {
-        foreach (RectTransform box in UpgradeIndicatorBoxes)
+        if (lastCurrentSim != sim.ActualSims.CurrentSim)
         {
-            Destroy(box.gameObject);
+            lastCurrentSim = sim.ActualSims.CurrentSim;
+            RebuildTimeline();
         }
-        UpgradeIndicatorBoxes.Clear();
-        UpdateTimelineElement(Foreground, sim.ActualSims.CurrentSim.CurrentTime);
-        Simulation currentSim = sim.ActualSims.CurrentSim;
-        for (int i = 0; i < currentSim.boughtUpgrades.Count;)
+        RepaintTimeline();
+    }
+
+    private void RebuildTimeline()
+    {
+        foreach (TimelineElement element in Elements)
         {
-            RectTransform indicator = Instantiate(UpgradeBuiltBoxPrefab, transform, false);
-            int timeStepBuilt = currentSim.boughtUpgradeTimes[i];
-            indicator.anchoredPosition = new Vector2(XPositionForTimestep(timeStepBuilt), 0);
-            while (i < currentSim.boughtUpgrades.Count && currentSim.boughtUpgradeTimes[i] == timeStepBuilt)
-            {
-                indicator.GetComponent<TooltipTarget>().entries.Add(sim.ActualSims.CurrentSim.boughtUpgrades[i]);
-                i++;
-            }
-            UpgradeIndicatorBoxes.Add(indicator);
+            Destroy(element.gameObject);
+        }
+        Elements.Clear();
+
+        for (int timeStep = 0; timeStep < sim.ActualSims.CurrentSim.MaxTime; timeStep++)
+        {
+            TimelineElement element = Instantiate(timelineElementPrefab, transform, false);
+            element.Init(sim.ActualSims.CurrentSim, timeStep);
+            Elements.Add(element);
+        }
+    }
+
+    private void RepaintTimeline()
+    {
+        foreach (TimelineElement element in Elements)
+        {
+            element.Paint();
         }
     }
 
@@ -58,8 +67,19 @@ public class Timeline : MonoBehaviour
         numPreviews++;
         lastPreviewTime = previewTime;
 
+        RepaintTimeline();
+        if (lastPreviewTime != null)
+        {
+            int currentTime = sim.ActualSims.CurrentSim.CurrentTime;
+            for (int timeStep = currentTime + 1; timeStep < currentTime + lastPreviewTime; timeStep++)
+            {
+                Elements[timeStep].PaintPreview();
+            }
+
+            Elements[currentTime + lastPreviewTime.Value].PaintUpgradePreview();
+        }
+
         // TODO show a different color/size if null
-        UpdateTimelineElement(Preview, sim.ActualSims.CurrentSim.CurrentTime + previewTime ?? 0);
     }
 
     public void EndUpgradePreview()
@@ -73,17 +93,7 @@ public class Timeline : MonoBehaviour
 
         if (numPreviews == 0)
         {
-            UpdateTimelineElement(Preview, 0);
+            RepaintTimeline();
         }
-    }
-
-    private float XPositionForTimestep(int timeToShow)
-    {
-        return Background.rect.width * ((float)timeToShow / sim.ActualSims.CurrentSim.MaxTime);
-    }
-
-    private void UpdateTimelineElement(RectTransform element, int timeToShow)
-    {
-        element.sizeDelta = new Vector2(XPositionForTimestep(timeToShow), element.sizeDelta.y);
     }
 }
