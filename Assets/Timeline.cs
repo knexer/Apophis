@@ -32,12 +32,17 @@ public class Timeline : MonoBehaviour
         }
         UpgradeIndicatorBoxes.Clear();
         UpdateTimelineElement(Foreground, sim.ActualSims.CurrentSim.CurrentTime);
-        for (int i = 0; i < sim.ActualSims.CurrentSim.boughtUpgrades.Count; i++)
+        Simulation currentSim = sim.ActualSims.CurrentSim;
+        for (int i = 0; i < currentSim.boughtUpgrades.Count;)
         {
             RectTransform indicator = Instantiate(UpgradeBuiltBoxPrefab, transform, false);
-            int timeStepBuilt = sim.ActualSims.CurrentSim.boughtUpgradeTimes[i];
+            int timeStepBuilt = currentSim.boughtUpgradeTimes[i];
             indicator.anchoredPosition = new Vector2(XPositionForTimestep(timeStepBuilt), 0);
-            indicator.GetComponent<TooltipTarget>().entries.Add(sim.ActualSims.CurrentSim.boughtUpgrades[i]);
+            while (i < currentSim.boughtUpgrades.Count && currentSim.boughtUpgradeTimes[i] == timeStepBuilt)
+            {
+                indicator.GetComponent<TooltipTarget>().entries.Add(sim.ActualSims.CurrentSim.boughtUpgrades[i]);
+                i++;
+            }
             UpgradeIndicatorBoxes.Add(indicator);
         }
     }
