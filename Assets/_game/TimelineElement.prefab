@@ -215,6 +215,7 @@ MonoBehaviour:
   UpgradeColor: {r: 0.1882353, g: 1, b: 0.101960786, a: 1}
   PreviewColor: {r: 0.627451, g: 0.76862746, b: 1, a: 1}
   UpgradePreviewColor: {r: 0.81960785, g: 1, b: 0.8, a: 1}
+  InvalidPreviewColor: {r: 1, g: 0.69411767, b: 0.69411767, a: 1}
   Background: {fileID: 6999676269579756145}
 --- !u!114 &8164376257941942825
 MonoBehaviour:

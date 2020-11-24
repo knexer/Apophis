@@ -11,6 +11,7 @@ public class TimelineElement : MonoBehaviour
     [SerializeField] private Color UpgradeColor;
     [SerializeField] private Color PreviewColor;
     [SerializeField] private Color UpgradePreviewColor;
+    [SerializeField] private Color InvalidPreviewColor;
 
     [SerializeField] private Image Background;
 
@@ -54,5 +55,10 @@ public class TimelineElement : MonoBehaviour
     public void PaintUpgradePreview()
     {
         Background.color = UpgradePreviewColor;
+    }
+
+    internal void PaintInvalidPreview()
+    {
+        Background.color = InvalidPreviewColor;
     }
 }

@@ -78,6 +78,14 @@ public class Timeline : MonoBehaviour
 
             Elements[currentTime + lastPreviewTime.Value].PaintUpgradePreview();
         }
+        else
+        {
+            int currentTime = sim.ActualSims.CurrentSim.CurrentTime;
+            for (int timeStep = currentTime + 1; timeStep < Elements.Count; timeStep++)
+            {
+                Elements[timeStep].PaintInvalidPreview();
+            }
+        }
 
         // TODO show a different color/size if null
     }
