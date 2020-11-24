@@ -21,4 +21,9 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         Destroy(Tooltip.gameObject);
     }
+
+    private void OnDestroy()
+    {
+        Destroy(Tooltip.gameObject);
+    }
 }
