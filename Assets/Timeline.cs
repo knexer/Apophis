@@ -40,7 +40,7 @@ public class Timeline : MonoBehaviour
         }
         Elements.Clear();
 
-        for (int timeStep = 0; timeStep < sim.ActualSims.CurrentSim.MaxTime; timeStep++)
+        for (int timeStep = 0; timeStep <= sim.ActualSims.CurrentSim.MaxTime; timeStep++)
         {
             TimelineElement element = Instantiate(timelineElementPrefab, transform, false);
             element.Init(sim.ActualSims.CurrentSim, timeStep);
