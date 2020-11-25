@@ -11,9 +11,10 @@ public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private Text Name;
     [SerializeField] private TMP_Text Description;
     [SerializeField] private TMP_Text Cost;
-    [SerializeField] private Text TimeToGet;
+    [SerializeField] private Text Quantity;
     [SerializeField] private RectTransform EffectsContainer;
     [SerializeField] private TMP_Text EffectDescriptionPrefab;
+    [SerializeField] private Button BuyButton;
 
     [HideInInspector] public SimulationManager Simulation;
     [HideInInspector] public Timeline Timeline;
@@ -33,7 +34,7 @@ public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             effectDescription.text = effect.Describe();
         }
 
-        GetComponent<Button>().onClick.AddListener(BuyUpgrade);
+        BuyButton.onClick.AddListener(BuyUpgrade);
 
         Simulation.OnSimChanged += UpdateDisplay;
         UpdateDisplay();
@@ -41,21 +42,11 @@ public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private void UpdateDisplay()
     {
-        int? timeToGet = Simulation.GetTimeToPurchase(Upgrade);
-        if (timeToGet == null)
-        {
-            TimeToGet.text = "ERR";
-            TimeToGet.color = Color.red;
-        }
-        else
-        {
-            TimeToGet.text = timeToGet.ToString() + " cycles";
-            if (timeToGet < 6) TimeToGet.color = Color.green;
-            else if (timeToGet < 30) TimeToGet.color = Color.yellow;
-            else TimeToGet.color = Color.Lerp(Color.red, Color.yellow, .5f);
-        }
+        Quantity.text = $"{Simulation.ActualSims.CurrentSim.boughtUpgrades.Count(upgrade => upgrade == Upgrade)} owned";
 
-        GetComponent<Button>().interactable = timeToGet != null && !Simulation.IsLocked;
+        int? timeToGet = Simulation.GetTimeToPurchase(Upgrade);
+        BuyButton.interactable = timeToGet != null && !Simulation.IsLocked;
+        BuyButton.GetComponent<UpgradeBuyButton>().UpdateButton(timeToGet);
     }
 
     private void BuyUpgrade()
