@@ -12,7 +12,7 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private float SimStepAnimationMinSeconds;
     [SerializeField] private GameObject UpgradeContainer;
     public SimulationHistory CurrentTimelineHistory;
-    public List<SimulationHistory> OtherTimelineHistories;
+    public List<SimulationHistory> OtherTimelineHistories = new List<SimulationHistory>();
 
     public bool IsLocked { get; private set; }
     public event Action OnSimChanged;
