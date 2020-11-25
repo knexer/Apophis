@@ -11,6 +11,9 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private float SimStepAnimationSpeedupRatioPerStep;
     [SerializeField] private float SimStepAnimationMinSeconds;
     [SerializeField] private GameObject UpgradeContainer;
+    public SimulationHistory CurrentTimelineHistory;
+    public List<SimulationHistory> OtherTimelineHistories;
+
     public bool IsLocked { get; private set; }
     public event Action OnSimChanged;
     public IEnumerable<Upgrade> AvailableUpgrades => UpgradeContainer.GetComponentsInChildren<Upgrade>();
@@ -22,7 +25,7 @@ public class SimulationManager : MonoBehaviour
         StartNewTimeline();
     }
 
-    private void UpdateUpgradePurchaseTimes()
+    private void UpdateForecast()
     {
         memoizedUpgradeTimes.Clear();
         foreach (Upgrade upgrade in AvailableUpgrades)
@@ -34,13 +37,19 @@ public class SimulationManager : MonoBehaviour
         copy.DoThatHackyThang();
         try
         {
-            while (!AvailableUpgrades.All(memoizedUpgradeTimes.ContainsKey) && copy.CurrentSim.CurrentTime < copy.CurrentSim.MaxTime)
+            while (copy.CurrentSim.CurrentTime < copy.CurrentSim.MaxTime)
             {
                 copy.AdvanceTime();
+                int currentTime = copy.CurrentSim.CurrentTime;
                 foreach (Upgrade upgrade in AvailableUpgrades)
                 {
                     if (memoizedUpgradeTimes.ContainsKey(upgrade)) continue;
-                    if (copy.CurrentSim.CanBuyUpgrade(upgrade)) memoizedUpgradeTimes[upgrade] = copy.CurrentSim.CurrentTime;
+                    if (copy.CurrentSim.CanBuyUpgrade(upgrade)) memoizedUpgradeTimes[upgrade] = currentTime;
+                }
+                CurrentTimelineHistory.SetResourcesAtTime(currentTime, copy.CurrentSim.resources);
+                for (int historyIndex = 0; historyIndex < copy.PreviousSims.Count; historyIndex++)
+                {
+                    OtherTimelineHistories[historyIndex].SetResourcesAtTime(currentTime, copy.PreviousSims[historyIndex].resources);
                 }
             }
         }
@@ -52,7 +61,7 @@ public class SimulationManager : MonoBehaviour
 
     private void SimChanged()
     {
-        UpdateUpgradePurchaseTimes();
+        UpdateForecast();
         OnSimChanged?.Invoke();
     }
 
@@ -74,6 +83,11 @@ public class SimulationManager : MonoBehaviour
     public void StartNewTimeline()
     {
         ActualSims.StartNewTimeline();
+        CurrentTimelineHistory = new SimulationHistory(ActualSims.CurrentSim);
+        foreach (Simulation simulation in ActualSims.PreviousSims)
+        {
+            OtherTimelineHistories.Add(new SimulationHistory(simulation));
+        }
         SimChanged();
     }
 

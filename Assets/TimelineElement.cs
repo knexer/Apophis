@@ -15,10 +15,10 @@ public class TimelineElement : MonoBehaviour
 
     [SerializeField] private Image Background;
 
-    private Simulation sim;
+    private SimulationHistory sim;
     private int timeStep;
 
-    public void Init(Simulation sim, int timeStep)
+    public void Init(SimulationHistory sim, int timeStep)
     {
         this.sim = sim;
         this.timeStep = timeStep;
@@ -27,7 +27,7 @@ public class TimelineElement : MonoBehaviour
 
     public void Paint()
     {
-        if (sim.CurrentTime >= timeStep)
+        if (sim.CurrentTimeSim.CurrentTime >= timeStep)
         {
             Background.color = PastColor;
         }
@@ -36,15 +36,17 @@ public class TimelineElement : MonoBehaviour
             Background.color = FutureColor;
         }
 
-        GetComponent<TooltipTarget>().entries.Clear();
-        for (int i = 0; i < sim.boughtUpgradeTimes.Count; i++)
+        TooltipTarget tooltipTarget = GetComponent<TooltipTarget>();
+        tooltipTarget.entries.Clear();
+        for (int i = 0; i < sim.CurrentTimeSim.boughtUpgradeTimes.Count; i++)
         {
-            if (sim.boughtUpgradeTimes[i] == timeStep)
+            if (sim.CurrentTimeSim.boughtUpgradeTimes[i] == timeStep)
             {
-                GetComponent<TooltipTarget>().entries.Add(sim.boughtUpgrades[i]);
+                tooltipTarget.entries.Add(sim.CurrentTimeSim.boughtUpgrades[i]);
                 Background.color = UpgradeColor;
             }
         }
+        tooltipTarget.entries.AddRange(sim.ResourcesAtEachTime[timeStep].Resources);
     }
 
     public void PaintPreview()

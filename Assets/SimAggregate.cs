@@ -35,12 +35,14 @@ public class SimAggregate : MonoBehaviour
         CurrentSim = Instantiate(SimPrefab, transform, false);
         CurrentSim.AllUpgradesCallback = GetCrossTimelineBoughtUpgrades;
         CurrentSim.QueueUpgrades(Enumerable.Repeat(InitialUpgrade, 1));
+        CurrentSim.resources.GetResource(ResourceType.Capacity).Amount = 50;
         for (int i = 0; i < PreviousSims.Count; i++)
         {
             Simulation replacementSim = Instantiate(SimPrefab, transform, false);
             replacementSim.AllUpgradesCallback = GetCrossTimelineBoughtUpgrades;
             Simulation previousSim = PreviousSims[i];
             replacementSim.QueueUpgrades(previousSim.UpgradeQueue);
+            replacementSim.resources.GetResource(ResourceType.Capacity).Amount = 50;
             PreviousSims[i] = replacementSim;
             Destroy(previousSim.gameObject);
         }

@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IUpgradeEffect
 {
     string Describe();
-    void Apply(Simulation sim, ResourceManager resources);
+    void Apply(Simulation sim, ResourceCollection resources);
 }

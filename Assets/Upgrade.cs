@@ -20,7 +20,7 @@ public class Upgrade : MonoBehaviour, ITooltipEntry
         effects = GetComponents<IUpgradeEffect>();
     }
 
-    public void Apply(Simulation sim, ResourceManager resources)
+    public void Apply(Simulation sim, ResourceCollection resources)
     {
         foreach (IUpgradeEffect effect in effects)
         {
@@ -31,19 +31,5 @@ public class Upgrade : MonoBehaviour, ITooltipEntry
     public void AddTooltipEntry(Tooltip host)
     {
         Instantiate(TooltipEntryPrefab, host.transform, false).GetComponentInChildren<TMP_Text>().text = Name;
-    }
-}
-
-[Serializable]
-public class ResourceDelta
-{
-    public ResourceType Type;
-    public int Amount;
-
-    public ResourceDelta Abs() => new ResourceDelta() {Type = Type, Amount = Mathf.Abs(Amount)};
-
-    public override string ToString()
-    {
-        return $"{Amount} {ResourceTypeConfig.configs[Type].NameAndIcon}";
     }
 }

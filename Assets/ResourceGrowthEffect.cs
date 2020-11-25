@@ -12,7 +12,7 @@ public class ResourceGrowthEffect : MonoBehaviour, IUpgradeEffect
         return $"Increases {ResourceTypeConfig.configs[Type].NameAndIcon} income by +{Growth}/cycle.";
     }
 
-    public void Apply(Simulation sim, ResourceManager resources)
+    public void Apply(Simulation sim, ResourceCollection resources)
     {
         resources.GetResource(Type).ChangeNextCycle += Growth;
     }

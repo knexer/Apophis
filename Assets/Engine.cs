@@ -11,7 +11,7 @@ public class Engine : MonoBehaviour, IUpgradeEffect
         return $"Consume {OperatingCost} to accelerate the asteroid, generating Deflection. Most effective when powered early.";
     }
 
-    public void Apply(Simulation sim, ResourceManager resources)
+    public void Apply(Simulation sim, ResourceCollection resources)
     {
         if (resources.CanApplyNextCycle(OperatingCost))
         {
