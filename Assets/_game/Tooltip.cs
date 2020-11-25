@@ -5,24 +5,27 @@ using UnityEngine;
 
 public class Tooltip : MonoBehaviour
 {
-    private void Awake()
-    {
-        // TODO dis suc
-        transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-    }
-    // Update is called once per frame
-    private void Update()
-    {
-        transform.position = Input.mousePosition;
-    }
-
     public void SetTarget(TooltipTarget tooltipTarget)
     {
-        // Populate UI
+        // Configure layout
+        RectTransform canvasTransform = tooltipTarget.GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        RectTransform tooltipTransform = GetComponent<RectTransform>();
+        RectTransform targetTransform = tooltipTarget.GetComponent<RectTransform>();
+
+        tooltipTransform.SetParent(canvasTransform, false);
+
+        float xOffset = targetTransform.rect.xMin;
+        if (targetTransform.position.x > canvasTransform.rect.width / 2)
+        {
+            tooltipTransform.pivot = new Vector2(1, tooltipTransform.pivot.y);
+            xOffset = targetTransform.rect.xMax;
+        }
+        tooltipTransform.position = ((Vector2)targetTransform.position) + new Vector2(xOffset, targetTransform.rect.yMax);
+
+        // Populate with data
         foreach (ITooltipEntry entry in tooltipTarget.entries)
         {
             entry.AddTooltipEntry(this);
         }
-        Update();
     }
 }
