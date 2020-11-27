@@ -5,28 +5,34 @@ using UnityEngine;
 
 public class Timeline : MonoBehaviour
 {
-    [SerializeField] private SimulationManager sim;
     [SerializeField] private TimelineElement timelineElementPrefab;
-    [SerializeField] private RectTransform UpgradeBuiltBoxPrefab;
+
+    private SimulationManager simManager;
+    private int? timelineIndex;
 
     private int numPreviews = 0;
     private int? lastPreviewTime = 0;
-    private Simulation lastCurrentSim;
+    private Simulation lastSim;
 
     private List<TimelineElement> Elements = new List<TimelineElement>();
 
-    void Start()
+    private Simulation CurrentSim => timelineIndex.HasValue ? simManager.ActualSims.PreviousSims[timelineIndex.Value] : simManager.ActualSims.CurrentSim;
+    private SimulationHistory CurrentHistory => timelineIndex.HasValue ? simManager.OtherTimelineHistories[timelineIndex.Value] : simManager.CurrentTimelineHistory;
+
+    public void Init(SimulationManager simManager, int? timelineIndex)
     {
-        Canvas.ForceUpdateCanvases();
-        sim.OnSimChanged += UpdateTimeline;
+        this.simManager = simManager;
+        this.timelineIndex = timelineIndex;
+
+        this.simManager.OnSimChanged += UpdateTimeline;
         UpdateTimeline();
     }
 
     private void UpdateTimeline()
     {
-        if (lastCurrentSim != sim.ActualSims.CurrentSim)
+        if (lastSim != CurrentSim)
         {
-            lastCurrentSim = sim.ActualSims.CurrentSim;
+            lastSim = CurrentSim;
             RebuildTimeline();
         }
         RepaintTimeline();
@@ -40,10 +46,10 @@ public class Timeline : MonoBehaviour
         }
         Elements.Clear();
 
-        for (int timeStep = 0; timeStep <= sim.ActualSims.CurrentSim.MaxTime; timeStep++)
+        for (int timeStep = 0; timeStep <= CurrentSim.MaxTime; timeStep++)
         {
             TimelineElement element = Instantiate(timelineElementPrefab, transform, false);
-            element.Init(sim.CurrentTimelineHistory, timeStep);
+            element.Init(CurrentHistory, timeStep);
             Elements.Add(element);
         }
     }
@@ -58,7 +64,7 @@ public class Timeline : MonoBehaviour
 
     public void PreviewUpgrade(Upgrade upgrade)
     {
-        int? previewTime = sim.GetTimeToPurchase(upgrade);
+        int? previewTime = simManager.GetTimeToPurchase(upgrade);
         if (numPreviews > 0 && lastPreviewTime != previewTime)
         {
             throw new Exception($"Trying to preview time {previewTime} while already showing a preview of time {lastPreviewTime}");
@@ -70,7 +76,7 @@ public class Timeline : MonoBehaviour
         RepaintTimeline();
         if (lastPreviewTime != null)
         {
-            int currentTime = sim.ActualSims.CurrentSim.CurrentTime;
+            int currentTime = CurrentSim.CurrentTime;
             for (int timeStep = currentTime + 1; timeStep < currentTime + lastPreviewTime; timeStep++)
             {
                 Elements[timeStep].PaintPreview();
@@ -80,7 +86,7 @@ public class Timeline : MonoBehaviour
         }
         else
         {
-            int currentTime = sim.ActualSims.CurrentSim.CurrentTime;
+            int currentTime = CurrentSim.CurrentTime;
             for (int timeStep = currentTime + 1; timeStep < Elements.Count; timeStep++)
             {
                 Elements[timeStep].PaintInvalidPreview();

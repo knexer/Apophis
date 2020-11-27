@@ -17,7 +17,7 @@ public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private Button BuyButton;
 
     [HideInInspector] public SimulationManager Simulation;
-    [HideInInspector] public Timeline Timeline;
+    [HideInInspector] public ParallelTimelineDisplay Timelines;
     [HideInInspector] public Upgrade Upgrade;
 
     private void Start()
@@ -56,11 +56,11 @@ public class UpgradeDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Timeline.PreviewUpgrade(Upgrade);
+        Timelines.CurrentTimeline.PreviewUpgrade(Upgrade);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Timeline.EndUpgradePreview();
+        Timelines.CurrentTimeline.EndUpgradePreview();
     }
 }

@@ -83,6 +83,7 @@ public class SimulationManager : MonoBehaviour
     public void StartNewTimeline()
     {
         ActualSims.StartNewTimeline();
+        OtherTimelineHistories.Clear();
         CurrentTimelineHistory = new SimulationHistory(ActualSims.CurrentSim);
         foreach (Simulation simulation in ActualSims.PreviousSims)
         {
