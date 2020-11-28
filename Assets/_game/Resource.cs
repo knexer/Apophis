@@ -27,7 +27,7 @@ public enum ResourceType
 {
     Metal,
     Volatiles,
-    Components,
+    Parts,
     Fuel,
     Capacity,
     Deflection

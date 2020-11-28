@@ -4199,8 +4199,8 @@ MonoBehaviour:
   m_Spacing: 10
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -5281,7 +5281,7 @@ GameObject:
   - component: {fileID: 1815749358}
   - component: {fileID: 1815749359}
   m_Layer: 0
-  m_Name: Components
+  m_Name: Parts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5316,7 +5316,7 @@ MonoBehaviour:
   Type: 2
   BigImage: {fileID: 21300000, guid: e199c57b2ad5058469d623b26deb1aef, type: 3}
   Icon: {fileID: -3255618166278078183, guid: bfd55376c3d3c9a49a38b076f6fa98ea, type: 3}
-  Name: Components
+  Name: Parts
   IconEmbedTag: <sprite="tile components" name="tile components_0">
 --- !u!1 &1823432545
 GameObject:
