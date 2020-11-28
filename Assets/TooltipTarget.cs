@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,7 +10,10 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private Tooltip Tooltip;
 
-    public List<ITooltipEntry> entries = new List<ITooltipEntry>();
+    public Func<List<ITooltipEntry>> entrySource;
+
+    public List<ITooltipEntry> entries => entrySource();
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {

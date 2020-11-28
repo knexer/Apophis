@@ -22,6 +22,7 @@ public class TimelineElement : MonoBehaviour
     {
         this.sim = sim;
         this.timeStep = timeStep;
+        GetComponent<TooltipTarget>().entrySource = GetTooltipEntries;
         Layout();
         Paint();
     }
@@ -47,17 +48,32 @@ public class TimelineElement : MonoBehaviour
             Background.color = FutureColor;
         }
 
-        TooltipTarget tooltipTarget = GetComponent<TooltipTarget>();
-        tooltipTarget.entries.Clear();
         for (int i = 0; i < sim.CurrentTimeSim.boughtUpgradeTimes.Count; i++)
         {
             if (sim.CurrentTimeSim.boughtUpgradeTimes[i] == timeStep)
             {
-                tooltipTarget.entries.Add(sim.CurrentTimeSim.boughtUpgrades[i]);
                 Background.color = UpgradeColor;
             }
+            if (sim.CurrentTimeSim.boughtUpgradeTimes[i] >= timeStep)
+            {
+                break;
+            }
         }
-        tooltipTarget.entries.AddRange(sim.ResourcesAtEachTime[timeStep].Resources);
+    }
+
+    private List<ITooltipEntry> GetTooltipEntries()
+    {
+        List<ITooltipEntry> entries = new List<ITooltipEntry>();
+        for (int i = 0; i < sim.CurrentTimeSim.boughtUpgradeTimes.Count; i++)
+        {
+            if (sim.CurrentTimeSim.boughtUpgradeTimes[i] == timeStep)
+            {
+                entries.Add(sim.CurrentTimeSim.boughtUpgrades[i]);
+            }
+        }
+        entries.AddRange(sim.ResourcesAtEachTime[timeStep].Resources);
+
+        return entries;
     }
 
     public void PaintPreview()
