@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 6336196718675611022}
   - component: {fileID: 6336196718675611010}
   - component: {fileID: 6336196718675611009}
-  - component: {fileID: 6336196718675611008}
-  - component: {fileID: 6336196718675611023}
   - component: {fileID: 6336196718675611011}
+  - component: {fileID: 6062215325108704900}
   m_Layer: 5
   m_Name: TimelineDisplay
   m_TagString: Untagged
@@ -36,7 +35,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -78,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6336196718675611008
+--- !u!114 &6336196718675611011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,24 +86,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6336196718675611021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 00c171d96fde7a7468dbdf0e7ba7785b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
---- !u!114 &6336196718675611023
+  timelineElementPrefab: {fileID: 3224294513438831153, guid: 03b21e65a33c05c4096e32d57cada651,
+    type: 3}
+--- !u!114 &6062215325108704900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,20 +108,6 @@ MonoBehaviour:
   m_MinHeight: 25
   m_PreferredWidth: -1
   m_PreferredHeight: 25
-  m_FlexibleWidth: 1
+  m_FlexibleWidth: -1
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
---- !u!114 &6336196718675611011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6336196718675611021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00c171d96fde7a7468dbdf0e7ba7785b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timelineElementPrefab: {fileID: 3224294513438831153, guid: 03b21e65a33c05c4096e32d57cada651,
-    type: 3}

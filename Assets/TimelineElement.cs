@@ -22,7 +22,18 @@ public class TimelineElement : MonoBehaviour
     {
         this.sim = sim;
         this.timeStep = timeStep;
+        Layout();
         Paint();
+    }
+
+    public void Layout()
+    {
+        float totalWidth = transform.parent.GetComponent<RectTransform>().rect.width;
+        float widthPerElement = totalWidth / sim.ResourcesAtEachTime.Count;
+        float leftX = widthPerElement * timeStep;
+        RectTransform rect = GetComponent<RectTransform>();
+        rect.anchoredPosition = new Vector2(leftX, 0);
+        rect.sizeDelta = new Vector2(widthPerElement, rect.sizeDelta.y);
     }
 
     public void Paint()

@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Timeline : MonoBehaviour
+public class Timeline : UIBehaviour
 {
     [SerializeField] private TimelineElement timelineElementPrefab;
 
@@ -26,6 +27,15 @@ public class Timeline : MonoBehaviour
 
         this.simManager.OnSimChanged += UpdateTimeline;
         UpdateTimeline();
+    }
+
+    protected override void OnRectTransformDimensionsChange()
+    {
+        base.OnRectTransformDimensionsChange();
+        foreach (TimelineElement element in Elements)
+        {
+            element.Layout();
+        }
     }
 
     private void UpdateTimeline()
