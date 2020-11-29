@@ -28,7 +28,7 @@ public class TimelineOverModal : MonoBehaviour
     private void MaybeShowModal()
     {
         if (fastForwarding == true) return;
-        if (Sim.AvailableUpgrades.All(upgrade => Sim.GetTimeToPurchase(upgrade) == null))
+        if (Sim.AllUpgrades.All(upgrade => Sim.GetTimeToPurchase(upgrade) == null))
         {
             StartCoroutine(ShowModal());
         }

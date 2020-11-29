@@ -1,23 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UpgradeList : MonoBehaviour
 {
-    [SerializeField] private RectTransform UpgradeDisplayParent;
-    [SerializeField] private GameObject UpgradeParent;
-    [SerializeField] private UpgradeDisplay UpgradeDisplayPrefab;
+    [SerializeField] private RectTransform SpecializationDisplayParent;
+    [SerializeField] private GameObject SpecializationsContainer;
+    [SerializeField] private SpecializationDisplay SpecializationDisplayPrefab;
     [SerializeField] private SimulationManager Simulation;
     [SerializeField] private ParallelTimelineDisplay Timelines;
 
     void Start()
     {
-        foreach (Upgrade upgrade in UpgradeParent.GetComponentsInChildren<Upgrade>())
+        foreach (Specialization spec in SpecializationsContainer.GetComponentsInChildren<Specialization>())
         {
-            UpgradeDisplay upgradeDisplay = Instantiate(UpgradeDisplayPrefab, UpgradeDisplayParent, false);
-            upgradeDisplay.Upgrade = upgrade;
-            upgradeDisplay.Simulation = Simulation;
-            upgradeDisplay.Timelines = Timelines;
+            SpecializationDisplay specDisplay = Instantiate(SpecializationDisplayPrefab, SpecializationDisplayParent, false);
+            specDisplay.Init(spec, Simulation, Timelines);
         }
     }
 }

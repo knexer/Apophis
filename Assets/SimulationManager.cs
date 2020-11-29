@@ -10,13 +10,15 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private float SimStepAnimationSeconds;
     [SerializeField] private float SimStepAnimationSpeedupRatioPerStep;
     [SerializeField] private float SimStepAnimationMinSeconds;
-    [SerializeField] private GameObject UpgradeContainer;
+    [SerializeField] private GameObject SpecializationsContainer;
     public SimulationHistory CurrentTimelineHistory;
     public List<SimulationHistory> OtherTimelineHistories = new List<SimulationHistory>();
 
     public bool IsLocked { get; private set; }
     public event Action OnSimChanged;
-    public IEnumerable<Upgrade> AvailableUpgrades => UpgradeContainer.GetComponentsInChildren<Upgrade>();
+
+    public IEnumerable<Specialization> Specializations => SpecializationsContainer.GetComponentsInChildren<Specialization>();
+    public IEnumerable<Upgrade> AllUpgrades => SpecializationsContainer.GetComponentsInChildren<Specialization>().SelectMany(spec => spec.Upgrades);
 
     private readonly Dictionary<Upgrade, int?> memoizedUpgradeTimes = new Dictionary<Upgrade, int?>();
 
@@ -28,7 +30,7 @@ public class SimulationManager : MonoBehaviour
     private void UpdateForecast()
     {
         memoizedUpgradeTimes.Clear();
-        foreach (Upgrade upgrade in AvailableUpgrades)
+        foreach (Upgrade upgrade in AllUpgrades)
         {
             if (memoizedUpgradeTimes.ContainsKey(upgrade)) continue;
             if (ActualSims.CurrentSim.CanBuyUpgrade(upgrade)) memoizedUpgradeTimes[upgrade] = ActualSims.CurrentSim.CurrentTime;
@@ -41,7 +43,7 @@ public class SimulationManager : MonoBehaviour
             {
                 copy.AdvanceTime();
                 int currentTime = copy.CurrentSim.CurrentTime;
-                foreach (Upgrade upgrade in AvailableUpgrades)
+                foreach (Upgrade upgrade in AllUpgrades)
                 {
                     if (memoizedUpgradeTimes.ContainsKey(upgrade)) continue;
                     if (copy.CurrentSim.CanBuyUpgrade(upgrade)) memoizedUpgradeTimes[upgrade] = currentTime;
