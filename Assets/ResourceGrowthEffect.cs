@@ -9,7 +9,7 @@ public class ResourceGrowthEffect : MonoBehaviour, IUpgradeEffect
 
     public string Describe()
     {
-        return $"Increases {ResourceTypeConfig.configs[Type].NameAndIcon} income by +{Growth}/cycle.";
+        return $"Produces +{Growth} {ResourceTypeConfig.configs[Type].NameAndIcon}/cycle.";
     }
 
     public void Apply(Simulation sim, ResourceCollection resources)

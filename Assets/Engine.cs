@@ -8,7 +8,8 @@ public class Engine : MonoBehaviour, IUpgradeEffect
 
     public string Describe()
     {
-        return $"Consume {OperatingCost} to accelerate the asteroid, generating Deflection. Most effective when powered early.";
+        return $"Consume {OperatingCost.Abs()} to accelerate the asteroid, generating " +
+            $"1 {ResourceTypeConfig.configs[ResourceType.Deflection].NameAndIcon} for each remaining cycle.";
     }
 
     public void Apply(Simulation sim, ResourceCollection resources)
