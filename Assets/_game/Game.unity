@@ -578,10 +578,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 3
-  BigImage: {fileID: 21300000, guid: bbf502de8ecc9eb45b03b9c143455be5, type: 3}
-  Icon: {fileID: -2555439455684085216, guid: 7de2bafb47231824288f062280d9fe99, type: 3}
+  BigImage: {fileID: 21300000, guid: d9d0945e4b00d894dab0017f0c63759e, type: 3}
+  Icon: {fileID: -3175160331384042897, guid: 804a6ef0d30c20444b586fbbd9530f4e, type: 3}
   Name: Fuel
-  IconEmbedTag: <sprite="tile energy" name="tile energy_0">
+  IconEmbedTag: <sprite="fuel smol" name="fuel smol_0">
 --- !u!1 &71173768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 4
-  BigImage: {fileID: 0}
+  BigImage: {fileID: 21300000, guid: c687257dd011b9846bc7bd04bdd57447, type: 3}
   Icon: {fileID: 0}
   Name: Capacity
   IconEmbedTag: 
@@ -1710,10 +1710,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
-  BigImage: {fileID: 21300000, guid: 5fe4c7efd2b176141ae979f8339f7a09, type: 3}
-  Icon: {fileID: 2898365793761149533, guid: f42cd620231eea142a409098d583331a, type: 3}
+  BigImage: {fileID: 21300000, guid: cb8b730ae9fc1b94b8ba348febe7b2ac, type: 3}
+  Icon: {fileID: 21300000, guid: a488b6582185cdc42b25387716df7cf3, type: 3}
   Name: Metal
-  IconEmbedTag: <sprite="tile metal" name="tile metal_0">
+  IconEmbedTag: <sprite="metal smol" name="metal smol_0">
 --- !u!1 &454477401
 GameObject:
   m_ObjectHideFlags: 0
@@ -2911,10 +2911,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 5
-  BigImage: {fileID: 0}
-  Icon: {fileID: 0}
+  BigImage: {fileID: 21300000, guid: befb837f17a814a4a9f4e272bb1c6f8f, type: 3}
+  Icon: {fileID: -4134924967189613583, guid: 00a8280d58636d848bad14a48cecc836, type: 3}
   Name: Deflection
-  IconEmbedTag: 
+  IconEmbedTag: <sprite="deflection smol" name="deflection smol_0">
 --- !u!1 &1043137468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4403,10 +4403,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  BigImage: {fileID: 21300000, guid: 182427490c9991741b1f44a30042e4fa, type: 3}
-  Icon: {fileID: 3756617070973751357, guid: ff4803fe75966d74caaea390274614c9, type: 3}
+  BigImage: {fileID: 21300000, guid: bdf55b498f9b6bc4d93103a1ac69307d, type: 3}
+  Icon: {fileID: -3096775724382356244, guid: 9dbd43b595d1dcd45816fb88a91e661a, type: 3}
   Name: Volatiles
-  IconEmbedTag: <sprite="tile volatile" name="tile volatile_0">
+  IconEmbedTag: <sprite="volatile smol" name="volatile smol_0">
 --- !u!1 &1647236073
 GameObject:
   m_ObjectHideFlags: 0
@@ -5328,10 +5328,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
-  BigImage: {fileID: 21300000, guid: e199c57b2ad5058469d623b26deb1aef, type: 3}
-  Icon: {fileID: -3255618166278078183, guid: bfd55376c3d3c9a49a38b076f6fa98ea, type: 3}
+  BigImage: {fileID: 21300000, guid: 04d71c37f41433746a51ff94e285d1ab, type: 3}
+  Icon: {fileID: -1300246623241582124, guid: 6d9381c2597480e47b7b52b5f5e37ad4, type: 3}
   Name: Parts
-  IconEmbedTag: <sprite="tile components" name="tile components_0">
+  IconEmbedTag: <sprite="component smol" name="component smol_0">
 --- !u!1 &1823432545
 GameObject:
   m_ObjectHideFlags: 0

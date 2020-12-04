@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-4506128053965275966
+--- !u!21 &-1178813921382303435
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f42cd620231eea142a409098d583331a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d9381c2597480e47b7b52b5f5e37ad4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
-  m_Name: tile metal
+  m_Name: component smol
   m_EditorClassIdentifier: 
-  hashCode: 164413893
-  material: {fileID: -4506128053965275966}
+  hashCode: -1023897134
+  material: {fileID: -1178813921382303435}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -71,30 +71,30 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  spriteSheet: {fileID: 2800000, guid: f42cd620231eea142a409098d583331a, type: 3}
+  spriteSheet: {fileID: 2800000, guid: 6d9381c2597480e47b7b52b5f5e37ad4, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 1
-    m_Name: tile metal_0
-    m_HashCode: -1341898422
+    m_Name: component smol_0
+    m_HashCode: 1667519965
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
-      m_Width: 150
-      m_Height: 150
-      m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 150
-      m_HorizontalAdvance: 150
+      m_Width: 25
+      m_Height: 25
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 25
+      m_HorizontalAdvance: 25
     m_GlyphRect:
       m_X: 0
       m_Y: 0
-      m_Width: 150
-      m_Height: 150
+      m_Width: 25
+      m_Height: 25
     m_Scale: 1
     m_AtlasIndex: 0
-    sprite: {fileID: 2898365793761149533, guid: f42cd620231eea142a409098d583331a,
+    sprite: {fileID: -1300246623241582124, guid: 6d9381c2597480e47b7b52b5f5e37ad4,
       type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

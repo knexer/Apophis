@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-6729790484562799114
+--- !u!21 &-7573884472251134421
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ff4803fe75966d74caaea390274614c9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 804a6ef0d30c20444b586fbbd9530f4e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
-  m_Name: tile volatile
+  m_Name: fuel smol
   m_EditorClassIdentifier: 
-  hashCode: -1174227596
-  material: {fileID: -6729790484562799114}
+  hashCode: 1581455431
+  material: {fileID: -7573884472251134421}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -71,30 +71,30 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  spriteSheet: {fileID: 2800000, guid: ff4803fe75966d74caaea390274614c9, type: 3}
+  spriteSheet: {fileID: 2800000, guid: 804a6ef0d30c20444b586fbbd9530f4e, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 1
-    m_Name: tile volatile_0
-    m_HashCode: 1166399803
+    m_Name: fuel smol_0
+    m_HashCode: -76918712
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
-      m_Width: 150
-      m_Height: 150
-      m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 150
-      m_HorizontalAdvance: 150
+      m_Width: 25
+      m_Height: 25
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 25
+      m_HorizontalAdvance: 25
     m_GlyphRect:
       m_X: 0
       m_Y: 0
-      m_Width: 150
-      m_Height: 150
+      m_Width: 25
+      m_Height: 25
     m_Scale: 1
     m_AtlasIndex: 0
-    sprite: {fileID: 3756617070973751357, guid: ff4803fe75966d74caaea390274614c9,
+    sprite: {fileID: -3175160331384042897, guid: 804a6ef0d30c20444b586fbbd9530f4e,
       type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
-  m_Name: tile energy
+  m_Name: metal smol
   m_EditorClassIdentifier: 
-  hashCode: 824341718
-  material: {fileID: 5774086021952804661}
+  hashCode: -300222228
+  material: {fileID: 4592881936970239533}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -36,34 +36,34 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  spriteSheet: {fileID: 2800000, guid: 7de2bafb47231824288f062280d9fe99, type: 3}
+  spriteSheet: {fileID: 2800000, guid: a488b6582185cdc42b25387716df7cf3, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 1
-    m_Name: tile energy_0
-    m_HashCode: 59967705
+    m_Name: metal smol_0
+    m_HashCode: -524493661
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
-      m_Width: 150
-      m_Height: 150
-      m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 150
-      m_HorizontalAdvance: 150
+      m_Width: 25
+      m_Height: 25
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 25
+      m_HorizontalAdvance: 25
     m_GlyphRect:
       m_X: 0
       m_Y: 0
-      m_Width: 150
-      m_Height: 150
+      m_Width: 25
+      m_Height: 25
     m_Scale: 1
     m_AtlasIndex: 0
-    sprite: {fileID: -2555439455684085216, guid: 7de2bafb47231824288f062280d9fe99,
+    sprite: {fileID: 4152090209973756007, guid: a488b6582185cdc42b25387716df7cf3,
       type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
---- !u!21 &5774086021952804661
+--- !u!21 &4592881936970239533
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -83,7 +83,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7de2bafb47231824288f062280d9fe99, type: 3}
+        m_Texture: {fileID: 2800000, guid: a488b6582185cdc42b25387716df7cf3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
