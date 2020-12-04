@@ -11,7 +11,7 @@ public class ResourceTypeConfig : MonoBehaviour
     [SerializeField] public Sprite Icon;
     [SerializeField] public string Name;
     [SerializeField] public string IconEmbedTag;
-    public string NameAndIcon => $"{IconEmbedTag} {Name}";
+    public string NameAndIcon => $"{IconEmbedTag}\u00A0{Name}";
 
     private void Awake()
     {
